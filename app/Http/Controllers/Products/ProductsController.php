@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product\Booking;
 use App\Models\Product\Cart;
+use App\Models\Product\Order;
 use App\Models\Product\Product;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class ProductsController extends Controller
 {
@@ -76,5 +80,92 @@ class ProductsController extends Controller
         if ($deleteProducCart) {
             return Redirect::route('cart')->with(['delete' => "product deleted from cart succesffully"]);
         }
+    }
+
+    public function prepareCheckout(Request $request)
+    {
+
+        $value = $request->price;
+
+        // lưu giá trị price vào session để sử dụng ở các request tiếp theo (ví dụ khi chuyển sang trang thanh toán).
+        Session::put('price', $value);  // Chỉ lưu, không gán return value
+
+        $newPrice = Session::get('price');  // Lấy đúng bằng key 'price'
+
+        if ($newPrice > 0) {
+            return Redirect::route('checkout');
+        }
+    }
+
+    public function checkout()
+    {
+        return view('products.checkout');
+    }
+
+    public function storeCheckout(Request $request)
+    {
+
+        $checkout = Order::create($request->all());
+
+        if ($checkout) {
+            return Redirect::route('products.pay');
+        }
+    }
+
+    public function payWithPaypal()
+    {
+        return view('products.pay');
+    }
+
+    public function success()
+    {
+
+        $deleteItems = Cart::where('user_id', Auth::user()->id);
+        $deleteItems->delete();
+
+
+        if ($deleteItems) {
+
+            Session::forget('price');
+
+            return view('products.success');
+        }
+    }
+
+    public function BookTables(Request $request)
+    {
+
+
+        Request()->validate([
+            "first_name" => "required|max:40",
+            "last_name" => "required|max:40",
+            "date" => "required",
+            "time" => "required",
+            "phone" => "required|max:40",
+            "message" => "required",
+        ]);
+
+        if ($request->date > date('n/j/Y')) {
+            $bookTables = Booking::create($request->all());
+
+            if ($bookTables) {
+                return Redirect::route('home')->with(['booking' => "you booked a table successfully"]);
+            }
+        } else {
+            return Redirect::route('home')->with(['date' => "invalide date, choose a date in the future"]);
+        }
+    }
+
+    public function menu()
+    {
+
+        $desserts = Product::select()->where("type", "desserts")->orderBy('id', 'desc')
+            ->take(4)->get();
+
+        $drinks = Product::select()->where("type", "drinks")->orderBy('id', 'desc')
+            ->take(4)->get();
+
+
+        return view('products.menu', compact('desserts', 'drinks'));
     }
 }

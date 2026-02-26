@@ -68,8 +68,8 @@
                 <td class="total">${{ $cartProduct->price }}</td>
               </tr><!-- END TR-->
               @endforeach
-              @else
 
+              @else
               <p class="alert alert-success">you have no products in cart just yet</p>
               @endif
 
@@ -85,23 +85,29 @@
           <h3>Cart Totals</h3>
           <p class="d-flex">
             <span>Subtotal</span>
-            <span>$20.60</span>
+            <span>${{ $totalPrice }}</span>
           </p>
           <p class="d-flex">
             <span>Delivery</span>
             <span>$0.00</span>
           </p>
-          <p class="d-flex">
-            <span>Discount</span>
-            <span>$3.00</span>
-          </p>
           <hr>
           <p class="d-flex total-price">
             <span>Total</span>
-            <span>$17.60</span>
+            <span>${{ $totalPrice }}</span>
           </p>
         </div>
-        <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+        @if($cartProducts->count() > 0)
+        <form method="POST" action="{{ route('prepare.checkout') }}">
+          @csrf
+          <input name="price" type="hidden" value="{{ $totalPrice }}">
+          <input type="submit" value="Proceed to Checkout" name="submit" class="btn btn-primary py-3 px-4">
+
+        </form>
+        @else
+
+        <p class="text-center alert alert-success">you cannot checkout because you have no items in cart</p>
+        @endif
       </div>
     </div>
   </div>

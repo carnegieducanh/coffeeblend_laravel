@@ -55,20 +55,24 @@
         </button>
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="index" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="menu" class="nav-link">Menu</a></li>
-            <li class="nav-item"><a href="services" class="nav-link">Services</a></li>
-            <li class="nav-item"><a href="about" class="nav-link">About</a></li>
+            <li class="nav-item active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{{ route('products.menu') }}" class="nav-link">Menu</a></li>
+            <li class="nav-item"><a href="{{ route('services') }}" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
 
-            <li class="nav-item"><a href="contact" class="nav-link">Contact</a></li>
-            <li class="nav-item cart"><a href="{{route('cart')}}" class="nav-link">
-                <span class="icon icon-shopping_cart"></span></a>
+            @if(isset(Auth::user()->id))
+            <li class="nav-item cart"><a href="{{ route('cart') }}" class="nav-link"><span
+                  class="icon icon-shopping_cart"></span></a>
+              @endif
               @guest
               @if (Route::has('login'))
-            <li class="nav-item"><a href="login" class="nav-link">login</a></li>
+            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">login</a></li>
             @endif
-            @if (Route::has('login'))
-            <li class="nav-item"><a href="register" class="nav-link">register</a></li>
+
+            @if (Route::has('register'))
+
+            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">register</a></li>
             @endif
             @else
             <li class="nav-item dropdown">
@@ -78,10 +82,20 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                <a class="dropdown-item" href="{{ route('users.orders') }}">
+                  My Orders
+                </a>
+                <a class="dropdown-item" href="{{ route('users.bookings') }}">
+                  My Bookings
+                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                   {{ __('Logout') }}
                 </a>
+
+
+
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                   @csrf
@@ -174,7 +188,7 @@
           <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;<script>
-            document.write(new Date().getFullYear());
+              document.write(new Date().getFullYear());
             </script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by
             <a href="https://colorlib.com" target="_blank">Colorlib</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
