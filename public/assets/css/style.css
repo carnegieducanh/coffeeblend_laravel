@@ -12173,3 +12173,68 @@ textarea.form-control {
         stroke-dashoffset: -136px;
     }
 }
+
+/* ===== Custom contrast fixes ===== */
+
+/* Black info bar: ensure white text is readable on dark background */
+.ftco-intro .wrap .info h3,
+.ftco-intro .wrap .info p {
+    color: #fff;
+}
+
+/* Amber/yellow book-a-table section: ensure black text on amber background */
+.ftco-intro .wrap .book,
+.ftco-intro .wrap .book h3 {
+    color: #000;
+}
+
+/* Book a Table form: override white text/border/placeholder/icon to black on amber bg */
+.ftco-intro .wrap .book .appointment-form .form-control {
+    color: rgba(0, 0, 0, 0.85) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+.ftco-intro .wrap .book .appointment-form .form-control::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+.ftco-intro .wrap .book .appointment-form .form-control::-moz-placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+.ftco-intro .wrap .book .appointment-form .form-control:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+.ftco-intro .wrap .book .appointment-form .form-control:-moz-placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+.ftco-intro .wrap .book .appointment-form .form-control:focus,
+.ftco-intro .wrap .book .appointment-form .form-control:active {
+    border-color: #000 !important;
+}
+.ftco-intro .wrap .book .appointment-form .form-group .icon span {
+    color: #000 !important;
+}
+
+/* Amber/yellow services section: ensure black text on amber background */
+.ftco-services p,
+.ftco-services .heading-section p {
+    color: #000;
+}
+
+/* Book a Table: inline validation error messages below each input */
+.booking-field-error {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #7a1010;
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+}
+
+/* Bestsellers: 3-line clamp for product description */
+.product-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}

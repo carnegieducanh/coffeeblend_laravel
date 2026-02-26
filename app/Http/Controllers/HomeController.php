@@ -13,11 +13,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['services', 'about', 'contact']);
-        // Dùng except() để loại trừ các trang công khai không cần đăng nhập:
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->except(['index', 'services', 'about', 'contact']);
+    //     // Dùng except() để loại trừ các trang công khai không cần đăng nhập:
+    // }
 
     /**
      * Show the application dashboard.

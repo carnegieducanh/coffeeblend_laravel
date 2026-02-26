@@ -167,14 +167,16 @@
                     <div class="tab-pane fade show active" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
                       <div class="row">
                         @foreach ($drinks as $drink)
-                            <div class="col-md-4 text-center">
-                                <div class="menu-wrap">
+                            <div class="col-md-4 text-center d-flex">
+                                <div class="menu-wrap w-100 d-flex flex-column">
                                     <a href="{{ route('product.single', $drink->id) }}" class="menu-img img mb-4" style="background-image: url({{ asset('assets/images/'. $drink->image.'') }});"></a>
-                                    <div class="text">
+                                    <div class="text d-flex flex-column flex-grow-1">
                                         <h3><a href="{{ route('product.single', $drink->id) }}">{{ $drink->name }}</a></h3>
-                                        <p>{{ $drink->description }}</p>
-                                        <p class="price"><span>${{ $drink->price }}</span></p>
-                                        <p><a href="{{ route('product.single', $drink->id) }}" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                        <p class="product-description">{{ $drink->description }}</p>
+                                        <div class="mt-auto">
+                                            <p class="price"><span>${{ $drink->price }}</span></p>
+                                            <p><a href="{{ route('product.single', $drink->id) }}" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -187,14 +189,16 @@
                     <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
                       <div class="row">
                         @foreach ($desserts as $dessert)
-                            <div class="col-md-4 text-center">
-                                <div class="menu-wrap">
+                            <div class="col-md-4 text-center d-flex">
+                                <div class="menu-wrap w-100 d-flex flex-column">
                                     <a href="{{ route('product.single', $dessert->id) }}" class="menu-img img mb-4" style="background-image: url({{ asset('assets/images/'.$dessert->image.'') }});"></a>
-                                    <div class="text">
+                                    <div class="text d-flex flex-column flex-grow-1">
                                         <h3><a href="{{ route('product.single', $dessert->id) }}">{{ $dessert->name }}</a></h3>
-                                        <p>{{ $dessert->description }}</p>
-                                        <p class="price"><span>${{ $dessert->price }}</span></p>
-                                        <p><a href="{{ route('product.single', $dessert->id) }}" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                        <p class="product-description">{{ $dessert->description }}</p>
+                                        <div class="mt-auto">
+                                            <p class="price"><span>${{ $dessert->price }}</span></p>
+                                            <p><a href="{{ route('product.single', $dessert->id) }}" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
