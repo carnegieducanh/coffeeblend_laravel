@@ -130,30 +130,42 @@ git push
 
 1. Click **"New Project"**
 2. Chọn **"Deploy a template"** → tìm **MySQL** → Click **Deploy**
-   - HOẶC: Click **"New Project"** → **"Empty Project"** → **"+ Add service"** → **"Database"** → **"Add MySQL"**
+    - HOẶC: Click **"New Project"** → **"Empty Project"** → **"+ Add service"** → **"Database"** → **"Add MySQL"**
 3. Railway sẽ tự động tạo MySQL 8 instance
 
-### Bước 4.3 – Lấy thông tin kết nối
+### Bước 4.3 – Mở public networking (BẮT BUỘC)
 
-1. Click vào service **MySQL** vừa tạo
-2. Chọn tab **"Variables"**
-3. Ghi lại các giá trị sau:
+> ⚠️ **Đây là bước hay bị bỏ qua nhất, dẫn đến lỗi kết nối!**
 
-| Variable | Ví dụ giá trị |
-|----------|----------------|
-| `MYSQLHOST` | `containers-us-west-xxx.railway.app` |
-| `MYSQLPORT` | `6543` (khác 3306!) |
-| `MYSQLDATABASE` | `railway` |
-| `MYSQLUSER` | `root` |
-| `MYSQLPASSWORD` | `AbCdEfGhIjKl` |
+Railway có **2 loại hostname** – phải dùng đúng loại:
 
-> 💡 Hoặc chuyển sang tab **"Connect"** → chọn **"MySQL"** → copy từng field riêng lẻ.
+| Loại | Hostname | Port | Dùng được từ |
+|------|----------|------|--------------|
+| **Internal** (KHÔNG dùng) | `mysql.railway.internal` | `3306` | Chỉ trong Railway |
+| **Public** (PHẢI dùng) | `interchange.proxy.rlwy.net` | `11151` (random) | Từ Render và internet |
 
-### Bước 4.4 – Mở port cho kết nối ngoài
+**Cách tạo public endpoint:**
 
-1. Trong MySQL service → Tab **"Settings"**
+1. Vào MySQL service → Tab **"Settings"**
 2. Section **"Networking"** → Click **"Generate Domain"** hoặc **"Expose Port"**
-3. Đây là bước cần thiết để Render kết nối được vào Railway DB
+3. Railway tạo ra: hostname dạng `xxx.proxy.rlwy.net` + port ngẫu nhiên (ví dụ `11151`)
+
+### Bước 4.4 – Lấy thông tin kết nối
+
+Sau khi đã tạo public endpoint:
+
+1. Vào tab **"Connect"** → chọn section **"Public"** (không phải "Private")
+2. Ghi lại từ connection string `mysql://USER:PASSWORD@HOST:PORT/DATABASE`:
+
+| Biến Render | Lấy từ Railway | Ví dụ thực tế |
+|-------------|----------------|---------------|
+| `DB_HOST` | Public hostname | `interchange.proxy.rlwy.net` |
+| `DB_PORT` | Public port (**KHÔNG phải 3306**) | `11151` |
+| `DB_DATABASE` | Database name | `railway` |
+| `DB_USERNAME` | Username | `root` |
+| `DB_PASSWORD` | Password (copy toàn bộ, ~32 ký tự) | `elEslcThRFIsnvjnCckoYAyTwQxRStwK` |
+
+> ⚠️ **Password** thường dài ~32 ký tự – click icon **copy** trong Railway để tránh copy thiếu.
 
 ---
 
@@ -176,14 +188,14 @@ git push
 
 Điền các thông tin sau:
 
-| Field | Giá trị |
-|-------|---------|
-| **Name** | `coffeeblend-laravel` (hoặc tên tùy chọn) |
-| **Region** | Singapore (gần VN nhất) hoặc tùy chọn |
-| **Branch** | `main` |
-| **Runtime** | **Docker** ← QUAN TRỌNG |
-| **Dockerfile Path** | `./Dockerfile` (Render tự detect) |
-| **Instance Type** | Free (hoặc Starter $7/month nếu cần) |
+| Field               | Giá trị                                   |
+| ------------------- | ----------------------------------------- |
+| **Name**            | `coffeeblend-laravel` (hoặc tên tùy chọn) |
+| **Runtime**         | **Docker** ← QUAN TRỌNG                   |
+| **Branch**          | `main`                                    |
+| **Region**          | Singapore (gần VN nhất) hoặc tùy chọn     |
+| **Dockerfile Path** | `./Dockerfile` (Render tự detect)         |
+| **Instance Type**   | Free (hoặc Starter $7/month nếu cần)      |
 
 > Render sẽ tự detect `Dockerfile` trong repo và dùng nó để build.
 
@@ -210,16 +222,18 @@ APP_URL=https://TÊN-APP-CỦA-BẠN.onrender.com
 > ⚠️ `APP_KEY` – copy từ file `.env` local của bạn (dòng `APP_KEY=base64:...`)
 > ⚠️ `APP_URL` – điền URL mà Render sẽ cấp, format: `https://coffeeblend-laravel.onrender.com`
 
-### Biến database (lấy từ Railway ở bước 4.3)
+### Biến database (lấy từ Railway – dùng PUBLIC endpoint)
 
 ```
 DB_CONNECTION=mysql
-DB_HOST=containers-us-west-xxx.railway.app
-DB_PORT=6543
+DB_HOST=interchange.proxy.rlwy.net     ← public hostname từ Railway
+DB_PORT=11151                           ← public port (KHÔNG phải 3306!)
 DB_DATABASE=railway
 DB_USERNAME=root
-DB_PASSWORD=AbCdEfGhIjKl
+DB_PASSWORD=elEslcThRFIsnvjnCckoYAyTwQxRStwK
 ```
+
+> ⚠️ Thay các giá trị trên bằng thông tin thật từ Railway của bạn.
 
 ### Biến session/cache/queue
 
@@ -251,7 +265,7 @@ Build lần đầu sẽ mất **5-15 phút** (download dependencies, build Vite 
 1. Mở URL: `https://TÊN-APP.onrender.com`
 2. Kiểm tra trang chủ hiển thị đúng
 3. Kiểm tra `/up` (health check endpoint của Laravel): `https://TÊN-APP.onrender.com/up`
-   - Nếu trả về `{"status":"ok"}` → app hoạt động
+    - Nếu trả về `{"status":"ok"}` → app hoạt động
 
 ### 7.3 Kiểm tra database
 
@@ -264,50 +278,129 @@ php artisan migrate:status
 
 ## 8. Troubleshooting
 
-### Lỗi: `No application encryption key has been specified`
-
-**Nguyên nhân:** Thiếu `APP_KEY` trong environment variables.
-**Giải quyết:** Thêm `APP_KEY` vào Render env vars (lấy từ `.env` local).
+> Các lỗi dưới đây là lỗi **thực tế đã gặp** khi deploy dự án này lần đầu.
 
 ---
 
-### Lỗi: `SQLSTATE[HY000] [2002] Connection refused` hoặc `php_network_getaddresses`
+### ❌ Lỗi 1: Build Docker thất bại – `Exited with status 1`
 
-**Nguyên nhân:** Sai thông tin kết nối DB hoặc Railway chưa expose port.
+**Thông báo:** `==> Exited with status 1`
+
+**Nguyên nhân có thể:**
+- File `start.sh` tạo trên Windows có ký tự xuống dòng `\r\n` (CRLF), Linux không đọc được
+- `tailwind.config.js` không tồn tại nhưng Dockerfile cố COPY nó
+- Lệnh `echo "...\n..."` không sinh newline thật trong PHP ini
+- `npm ci` hoặc `npm run build` lỗi
+
+**Đã fix trong Dockerfile:**
+- Thêm `RUN sed -i 's/\r$//' /usr/local/bin/start.sh` để strip CRLF
+- Bỏ file không tồn tại khỏi lệnh `COPY`
+- Đổi `echo` sang `printf` cho PHP ini
+
+---
+
+### ❌ Lỗi 2: `getaddrinfo for mysql.railway.internal failed: Name or service not known`
+
+**Thông báo đầy đủ:**
+```
+SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for
+mysql.railway.internal failed: Name or service not known
+```
+
+**Nguyên nhân:** Đang dùng **internal hostname** của Railway (`mysql.railway.internal`).
+Hostname này chỉ hoạt động khi app cũng chạy trong Railway. Render là dịch vụ ngoài, không resolve được.
+
 **Giải quyết:**
-1. Kiểm tra lại `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`
-2. Đảm bảo Railway MySQL đã expose port public (bước 4.4)
-3. Thử kết nối từ local: `mysql -h HOST -P PORT -u USER -pPASSWORD`
+1. Vào Railway → MySQL service → Settings → Networking
+2. Click **"Generate Domain"** để tạo **public endpoint**
+3. Dùng hostname mới (dạng `xxx.proxy.rlwy.net`) thay cho `mysql.railway.internal`
 
 ---
 
-### Lỗi: `chmod: changing permissions of '/var/www/html/...' denied`
+### ❌ Lỗi 3: `Connection timed out` (port 3306)
 
-**Nguyên nhân:** Quyền file trong Docker.
-**Giải quyết:** Đã được xử lý trong Dockerfile. Nếu vẫn lỗi, kiểm tra `docker/start.sh`.
+**Thông báo đầy đủ:**
+```
+SQLSTATE[HY000] [2002] Connection timed out
+(Host: mysql-production-f8a6.up.railway.app, Port: 3306)
+```
 
----
+**Nguyên nhân:** Railway **không expose port 3306** ra ngoài. Port 3306 là internal port.
+Khi tạo public endpoint, Railway assign một **port ngẫu nhiên khác** (ví dụ: `11151`).
 
-### Lỗi: CSS/JS không load (404)
-
-**Nguyên nhân:** Vite build chưa chạy hoặc `public/build/` không có.
-**Giải quyết:** Kiểm tra Docker build logs xem `npm run build` có thành công không.
-
----
-
-### Lỗi: `The stream or file storage/logs/laravel.log could not be opened`
-
-**Nguyên nhân:** Thư mục storage không có quyền ghi.
-**Giải quyết:** Đã set `LOG_CHANNEL=stderr` trong env vars – log sẽ ghi ra console thay vì file.
-
----
-
-### App chạy nhưng chậm / bị sleep
-
-**Nguyên nhân:** Free tier của Render sleep sau 15 phút không có request.
 **Giải quyết:**
-- Dùng dịch vụ ping định kỳ (UptimeRobot free) để giữ app tỉnh
-- Hoặc nâng lên **Starter plan** ($7/month)
+1. Vào Railway → MySQL → Settings → Networking → xem public endpoint
+2. Đọc **port thật** từ connection string (tab "Connect" → "Public")
+3. Cập nhật `DB_PORT` trên Render thành port đó (ví dụ `11151`, không phải `3306`)
+
+---
+
+### ❌ Lỗi 4: `Access denied for user 'root'` (sai password)
+
+**Thông báo đầy đủ:**
+```
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'100.64.0.2'
+(using password: YES)
+```
+
+**Nguyên nhân:** Password đang gửi đi không khớp với Railway.
+- Copy thiếu ký tự (password dài ~32 ký tự)
+- Có khoảng trắng thừa khi paste
+
+**Giải quyết:**
+1. Vào Railway → MySQL → tab **"Connect"** → section **"Public"**
+2. Từ connection string `mysql://root:PASSWORD@host:port/railway`, lấy đúng phần `PASSWORD`
+3. Hoặc vào tab **"Variables"** → click icon **copy** cạnh `MYSQLPASSWORD`
+4. Cập nhật `DB_PASSWORD` trên Render → Save Changes
+
+---
+
+### ❌ Lỗi 5: App chạy nhưng không có CSS/JS (trang trắng hoặc unstyled)
+
+**Triệu chứng:** Trang web hiển thị nội dung nhưng không có CSS, layout bị vỡ.
+`/up` endpoint vẫn trả về OK.
+
+**Nguyên nhân:** **Mixed Content** – Laravel tạo asset URL với `http://` nhưng browser đang ở `https://`.
+
+Cụ thể: Render dùng reverse proxy – HTTPS được terminate tại proxy, request vào container là HTTP.
+Laravel không biết đang ở HTTPS → `asset()` sinh URL `http://...` → browser block.
+
+**Đã fix trong `bootstrap/app.php`:**
+```php
+->withMiddleware(function (Middleware $middleware): void {
+    // Trust Render's reverse proxy để Laravel nhận diện đúng HTTPS
+    $middleware->trustProxies(at: '*');
+    // ...
+})
+```
+
+Sau khi push fix này, Render auto-deploy và CSS sẽ load bình thường.
+
+---
+
+### ❌ Lỗi 6: `No application encryption key has been specified`
+
+**Nguyên nhân:** Thiếu `APP_KEY` trong environment variables trên Render.
+
+**Giải quyết:** Lấy giá trị từ file `.env` local (dòng `APP_KEY=base64:...`) → thêm vào Render env vars.
+
+---
+
+### ❌ Lỗi 7: `The stream or file storage/logs/laravel.log could not be opened`
+
+**Nguyên nhân:** Thư mục `storage/logs/` không có quyền ghi (hoặc filesystem ephemeral).
+
+**Giải quyết:** Set `LOG_CHANNEL=stderr` trong Render env vars – log ghi ra console thay vì file.
+
+---
+
+### ⚠️ App chạy nhưng bị sleep / chậm
+
+**Nguyên nhân:** Free tier của Render sleep sau **15 phút** không có request. Lần đầu truy cập sau khi sleep mất ~30 giây.
+
+**Giải quyết:**
+- Dùng [UptimeRobot](https://uptimerobot.com) (miễn phí) để ping app mỗi 5 phút → giữ app tỉnh
+- Hoặc nâng lên **Starter plan** ($7/month) – không bị sleep
 
 ---
 
@@ -341,6 +434,7 @@ Render container **không lưu file** khi restart. Nghĩa là:
 - ✅ Data trong MySQL Railway → được lưu vĩnh viễn
 
 **Giải pháp nếu cần lưu file upload:**
+
 - Dùng **Cloudinary** (miễn phí 25GB) hoặc **AWS S3** cho file storage
 - Hoặc dùng Render **Persistent Disk** (có phí)
 
@@ -353,11 +447,11 @@ Render container **không lưu file** khi restart. Nghĩa là:
 
 ### Chi phí ước tính
 
-| Dịch vụ | Free Tier | Paid |
-|---------|-----------|------|
-| Render Web Service | Có (sleep sau 15 phút) | $7/month (Starter) |
-| Railway MySQL | $5 credit/month | Theo usage |
-| Domain custom | Miễn phí khi dùng Render | ~$10/year |
+| Dịch vụ            | Free Tier                | Paid               |
+| ------------------ | ------------------------ | ------------------ |
+| Render Web Service | Có (sleep sau 15 phút)   | $7/month (Starter) |
+| Railway MySQL      | $5 credit/month          | Theo usage         |
+| Domain custom      | Miễn phí khi dùng Render | ~$10/year          |
 
 ### Seeder và dữ liệu mẫu
 
@@ -366,6 +460,19 @@ Nếu cần chạy seeder sau khi deploy:
 ```bash
 # Từ Render Shell
 php artisan db:seed --class=AdminSeeder
+```
+
+Khi deploy lên Railway, chạy theo thứ tự:
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+Hoặc gộp lại:
+
+```bash
+php artisan migrate --seed
 ```
 
 ---
@@ -383,4 +490,4 @@ php artisan db:seed --class=AdminSeeder
 
 ---
 
-*Viết bởi Claude Code · CoffeeBlend Laravel Project*
+_Viết bởi Claude Code · CoffeeBlend Laravel Project_
