@@ -11,17 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Global middleware (TrustProxies, HandleCors, ValidatePostSize,
-        // TrimStrings, ConvertEmptyStringsToNull...) đã có sẵn trong Laravel 12.
-
-        // Web group (EncryptCookies, StartSession, VerifyCsrfToken,
-        // SubstituteBindings...) đã có sẵn trong Laravel 12.
-
-        // API group (ThrottleRequests:api, SubstituteBindings)
-        // đã có sẵn trong Laravel 12.
-
-        // Các alias chuẩn (auth, auth.basic, can, guest, throttle,
-        // verified, password.confirm, signed...) đã có sẵn trong Laravel 12.
+        // Trust all proxies (needed for Render.com reverse proxy)
+        // so Laravel correctly detects HTTPS and generates correct asset URLs
+        $middleware->trustProxies(at: '*');
 
         // Custom aliases
         $middleware->alias([
