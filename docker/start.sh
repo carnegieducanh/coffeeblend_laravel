@@ -31,6 +31,19 @@ if [ $? -ne 0 ]; then
     echo "[WARN] App will start anyway - fix env vars and redeploy."
 fi
 
+# Chay seeders neu SEED_DB=true
+if [ "${SEED_DB}" = "true" ]; then
+    echo "[INFO] Running database seeders (SEED_DB=true)..."
+    php artisan db:seed --force 2>&1
+    if [ $? -eq 0 ]; then
+        echo "[INFO] Seeding completed successfully."
+    else
+        echo "[WARN] Seeding failed! App will start anyway."
+    fi
+else
+    echo "[INFO] Skipping seeders (set SEED_DB=true to enable)."
+fi
+
 # Tao storage symlink
 if [ ! -L /var/www/html/public/storage ]; then
     echo "[INFO] Creating storage symlink..."

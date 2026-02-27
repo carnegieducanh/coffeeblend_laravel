@@ -9,7 +9,7 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('products')->insert([
+        DB::table('products')->insertOrIgnore([
             // Drinks
             [
                 'name'        => 'Coffee Cappuccino',

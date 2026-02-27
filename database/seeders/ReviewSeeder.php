@@ -9,7 +9,7 @@ class ReviewSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('reviews')->insert([
+        DB::table('reviews')->insertOrIgnore([
             [
                 'name'       => 'Sarah Johnson',
                 'review'     => 'The cappuccino here is absolutely divine! The atmosphere is cozy and the staff are always so friendly. My go-to spot every morning.',

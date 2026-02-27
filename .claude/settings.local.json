@@ -10,7 +10,13 @@
       "Bash(php artisan db:seed --pretend)",
       "Bash(php artisan db:seed --class=ProductSeeder)",
       "Bash(php artisan db:seed --class=AdminSeeder)",
-      "Bash(php artisan db:seed --class=ReviewSeeder)"
+      "Bash(php artisan db:seed --class=ReviewSeeder)",
+      "Bash(python3 -c \":*)",
+      "Bash(git add Dockerfile docker/start.sh)",
+      "Bash(git commit:*)",
+      "Bash(git push origin main)",
+      "Bash(git add bootstrap/app.php)",
+      "Bash(git add DEPLOYMENT.md)"
     ]
   }
 }

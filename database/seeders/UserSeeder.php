@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
+        DB::table('users')->insertOrIgnore([
             [
                 'name'       => 'huyducanh',
                 'email'      => 'coffeeblend@exam.com',
