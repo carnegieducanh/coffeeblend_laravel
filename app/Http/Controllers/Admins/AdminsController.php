@@ -151,18 +151,21 @@ class AdminsController extends Controller
 
     public function storeProducts(Request $request)
     {
-
-        $destinationPath = 'assets/images/';
-        $myimage = $request->image->getClientOriginalName();
-        $request->image->move(public_path($destinationPath), $myimage);
-
+        $request->validate([
+            'name'      => 'required|max:255',
+            'price'     => 'required',
+            'image_url' => 'required|string',
+            'type'      => 'required',
+        ], [
+            'image_url.required' => 'Ảnh sản phẩm chưa được upload lên Firebase. Vui lòng chọn ảnh và thử lại.',
+        ]);
 
         $storeProducts = Product::Create([
-            "name" => $request->name,
-            "price" => $request->price,
-            "image" => $myimage,
+            "name"        => $request->name,
+            "price"       => $request->price,
+            "image"       => $request->image_url,  // Firebase Storage download URL
             "description" => $request->description,
-            "type" => $request->type,
+            "type"        => $request->type,
         ]);
 
         if ($storeProducts) {
@@ -174,10 +177,11 @@ class AdminsController extends Controller
     {
         $product = Product::find($id);
 
-        if (File::exists(public_path('assets/images/' . $product->image))) {
-            File::delete(public_path('assets/images/' . $product->image));
-        } else {
-            //dd('File does not exists.');
+        // Only delete local file if image is not a Firebase URL
+        if ($product->image && !str_starts_with($product->image, 'http')) {
+            if (File::exists(public_path('assets/images/' . $product->image))) {
+                File::delete(public_path('assets/images/' . $product->image));
+            }
         }
 
         $product->delete();

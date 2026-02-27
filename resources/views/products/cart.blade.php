@@ -49,7 +49,7 @@
                       class="icon-close"></span></a></td>
 
                 <td class="image-prod"><img width="100" height="80"
-                    src="{{ asset('assets/images/'.$cartProduct->image.'') }}"></td>
+                    src="{{ str_starts_with($cartProduct->image, 'http') ? $cartProduct->image : asset('assets/images/'.$cartProduct->image) }}"></td>
 
                 <td class="product-name">
                   <h3>{{ $cartProduct->name }}</h3>

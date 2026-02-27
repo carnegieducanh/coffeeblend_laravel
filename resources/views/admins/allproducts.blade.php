@@ -39,7 +39,7 @@
                  <tr>
                     <th scope="row">{{ $product->id }}</th>
                     <td>{{ $product->name }}</td>
-                    <td><img src="{{ asset('assets/images/'.$product->image.'') }}"  width="70" height="70"></td>
+                    <td><img src="{{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }}" width="70" height="70"></td>
                     <td>${{ $product->price }}</td>
                     <td>{{ $product->type }}</td>
                     <td><a href="{{ route('delete.products', $product->id) }}" class="btn btn-danger  text-center ">delete</a></td>

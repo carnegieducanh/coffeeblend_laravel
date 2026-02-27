@@ -97,7 +97,7 @@
               <h3 class="mb-5 heading-pricing ftco-animate">Desserts</h3>
               @foreach ($desserts as $dessert)
                 <div class="pricing-entry d-flex ftco-animate">
-                    <div class="img" style="background-image: url({{ asset('assets/images/'.$dessert->image.'') }});"></div>
+                    <div class="img" style="background-image: url({{ str_starts_with($dessert->image, 'http') ? $dessert->image : asset('assets/images/'.$dessert->image) }});"></div>
                     <div class="desc pl-3">
                         <div class="d-flex text align-items-center">
                             <h3><span>{{ $dessert->name }}</span></h3>
@@ -119,7 +119,7 @@
 
               @foreach ($drinks as $drink)
                 <div class="pricing-entry d-flex ftco-animate">
-                    <div class="img" style="background-image: url({{ asset('assets/images/'.$drink->image.'') }});"></div>
+                    <div class="img" style="background-image: url({{ str_starts_with($drink->image, 'http') ? $drink->image : asset('assets/images/'.$drink->image) }});"></div>
                     <div class="desc pl-3">
                         <div class="d-flex text align-items-center">
                             <h3><span>{{ $drink->name }}</span></h3>
@@ -169,7 +169,7 @@
                         @foreach ($drinks as $drink)
                             <div class="col-md-4 text-center d-flex">
                                 <div class="menu-wrap w-100 d-flex flex-column">
-                                    <a href="{{ route('product.single', $drink->id) }}" class="menu-img img mb-4" style="background-image: url({{ asset('assets/images/'. $drink->image.'') }});"></a>
+                                    <a href="{{ route('product.single', $drink->id) }}" class="menu-img img mb-4" style="background-image: url({{ str_starts_with($drink->image, 'http') ? $drink->image : asset('assets/images/'.$drink->image) }});"></a>
                                     <div class="text d-flex flex-column flex-grow-1">
                                         <h3><a href="{{ route('product.single', $drink->id) }}">{{ $drink->name }}</a></h3>
                                         <p class="product-description">{{ $drink->description }}</p>
@@ -191,7 +191,7 @@
                         @foreach ($desserts as $dessert)
                             <div class="col-md-4 text-center d-flex">
                                 <div class="menu-wrap w-100 d-flex flex-column">
-                                    <a href="{{ route('product.single', $dessert->id) }}" class="menu-img img mb-4" style="background-image: url({{ asset('assets/images/'.$dessert->image.'') }});"></a>
+                                    <a href="{{ route('product.single', $dessert->id) }}" class="menu-img img mb-4" style="background-image: url({{ str_starts_with($dessert->image, 'http') ? $dessert->image : asset('assets/images/'.$dessert->image) }});"></a>
                                     <div class="text d-flex flex-column flex-grow-1">
                                         <h3><a href="{{ route('product.single', $dessert->id) }}">{{ $dessert->name }}</a></h3>
                                         <p class="product-description">{{ $dessert->description }}</p>

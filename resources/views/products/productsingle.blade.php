@@ -30,8 +30,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6 mb-5 ftco-animate">
-        <a href="{{ asset('assets/images/'.$product->image.'') }}" class="image-popup">
-          <img src="{{ asset('assets/images/'.$product->image.'') }}" class="img-fluid" alt="Colorlib Template">
+        <a href="{{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }}" class="image-popup">
+          <img src="{{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }}" class="img-fluid" alt="Colorlib Template">
         </a>
       </div>
       <div class="col-lg-6 product-details pl-md-5 ftco-animate">
@@ -89,7 +89,7 @@
       <div class="col-md-3">
         <div class="menu-entry">
           <a href="{{ route('product.single', $relatedProduct->id) }}" class="img"
-            style="background-image: url({{ asset('assets/images/'.$relatedProduct->image.'') }});"></a>
+            style="background-image: url({{ str_starts_with($relatedProduct->image, 'http') ? $relatedProduct->image : asset('assets/images/'.$relatedProduct->image) }});"></a>
           <div class="text text-center pt-4">
             <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a></h3>
             <p>

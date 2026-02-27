@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan migrate:status)",
+      "Bash(php artisan tinker --execute=\"DB::select\\(''SHOW TABLES''\\)\")",
+      "Bash(mysql -u root -e \"USE coffeeblend; SHOW TABLES;\")",
+      "Bash(/c/xampp/mysql/bin/mysql -u root -e \"USE coffeeblend; SHOW TABLES;\")",
+      "Bash(/c/xampp/mysql/bin/mysql -u root -e \":*)",
+      "Bash(/c/xampp/mysql/bin/mysql -u root --default-character-set=utf8mb4 -e \":*)",
+      "Bash(php artisan db:seed --pretend)",
+      "Bash(php artisan db:seed --class=ProductSeeder)",
+      "Bash(php artisan db:seed --class=AdminSeeder)",
+      "Bash(php artisan db:seed --class=ReviewSeeder)"
+    ]
+  }
+}

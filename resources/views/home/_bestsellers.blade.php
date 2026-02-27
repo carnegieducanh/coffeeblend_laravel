@@ -13,7 +13,7 @@
       @foreach ($products as $product)
       <div class="col-md-3 d-flex">
         <div class="menu-entry w-100 d-flex flex-column">
-          <a href="#" class="img" style="background-image: url({{ asset('assets/images/'.$product->image.'') }});"></a>
+          <a href="#" class="img" style="background-image: url({{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }});"></a>
           <div class="text text-center pt-4 d-flex flex-column flex-grow-1">
             <h3><a href="{{ route('product.single', $product->id) }}">{{ $product->name }}</a></h3>
             <p class="product-description">{{ $product->description }}</p>
