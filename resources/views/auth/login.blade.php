@@ -22,6 +22,11 @@
 
 <section class="ftco-section">
   <div class="container">
+    @if(Session::has('login_required'))
+    <div class="alert alert-warning mt-3" role="alert">
+      {{ Session::get('login_required') }}
+    </div>
+    @endif
     <div class="row">
       <div class="col-md-12 ftco-animate">
         <form method="POST" action="{{ route('login') }}" class="billing-form ftco-bg-dark p-3 p-md-5">

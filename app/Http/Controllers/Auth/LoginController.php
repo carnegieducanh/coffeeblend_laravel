@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product\Cart;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,33 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+    }
+
+    /**
+     * After successful login, handle any pending cart item saved before login.
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if (Session::has('pending_cart')) {
+            $pending   = Session::pull('pending_cart');
+            $productId = $pending['product_id'];
+
+            $alreadyInCart = Cart::where('pro_id', $pending['pro_id'])
+                ->where('user_id', $user->id)
+                ->count();
+
+            if ($alreadyInCart === 0) {
+                Cart::create([
+                    'pro_id'  => $pending['pro_id'],
+                    'name'    => $pending['name'],
+                    'image'   => $pending['image'],
+                    'price'   => $pending['price'],
+                    'user_id' => $user->id,
+                ]);
+            }
+
+            return redirect()->route('product.single', $productId)
+                ->with('success', 'Product added to cart successfully.');
+        }
     }
 }

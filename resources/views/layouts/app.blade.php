@@ -55,18 +55,33 @@
         </button>
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item {{ request()->routeIs('home', 'index') ? 'active' : '' }}"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
-            <li class="nav-item {{ request()->routeIs('products.menu') ? 'active' : '' }}"><a href="{{ route('products.menu') }}" class="nav-link">Menu</a></li>
-            <li class="nav-item {{ request()->routeIs('services') ? 'active' : '' }}"><a href="{{ route('services') }}" class="nav-link">Services</a></li>
-            <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}"><a href="{{ route('about') }}" class="nav-link">About</a></li>
-            <li class="nav-item {{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
+            <li class="nav-item {{ request()->routeIs('home', 'index') ? 'active' : '' }}"><a href="{{ route('home') }}"
+                class="nav-link">Home</a></li>
+            <li class="nav-item {{ request()->routeIs('products.menu') ? 'active' : '' }}"><a
+                href="{{ route('products.menu') }}" class="nav-link">Menu</a></li>
+            <li class="nav-item {{ request()->routeIs('services') ? 'active' : '' }}"><a href="{{ route('services') }}"
+                class="nav-link">Services</a></li>
+            <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}"><a href="{{ route('about') }}"
+                class="nav-link">About</a></li>
+            <li class="nav-item {{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}"
+                class="nav-link">Contact</a></li>
 
-            @if(isset(Auth::user()->id))
-            <li class="nav-item cart"><a href="{{ route('cart') }}" class="nav-link"><span
-                  class="icon icon-shopping_cart"></span></a>
-              @endif
-              @guest
-              @if (Route::has('login'))
+            @auth
+            @php $cartCount = \App\Models\Product\Cart::where('user_id', Auth::id())->count(); @endphp
+            <li class="nav-item cart">
+              <a href="{{ route('cart') }}" class="nav-link">
+                <span style="position: relative; display: inline-block;">
+                  <span class="icon icon-shopping_cart"></span>
+                  @if($cartCount > 0)
+                  <span
+                    style="position: absolute; top: -10px; right: -10px; background: #e74c3c; color: #fff; border-radius: 50%; font-size: 10px; min-width: 17px; height: 17px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; line-height: 1;">{{ $cartCount }}</span>
+                  @endif
+                </span>
+              </a>
+            </li>
+            @endauth
+            @guest
+            @if (Route::has('login'))
             <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">login</a></li>
             @endif
 
@@ -188,7 +203,7 @@
           <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;<script>
-              document.write(new Date().getFullYear());
+            document.write(new Date().getFullYear());
             </script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by
             <a href="https://colorlib.com" target="_blank">Colorlib</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
