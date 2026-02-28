@@ -398,9 +398,57 @@ Sau khi push fix này, Render auto-deploy và CSS sẽ load bình thường.
 
 **Nguyên nhân:** Free tier của Render sleep sau **15 phút** không có request. Lần đầu truy cập sau khi sleep mất ~30 giây.
 
-**Giải quyết:**
-- Dùng [UptimeRobot](https://uptimerobot.com) (miễn phí) để ping app mỗi 5 phút → giữ app tỉnh
-- Hoặc nâng lên **Starter plan** ($7/month) – không bị sleep
+**Giải quyết tạm thời – Dùng UptimeRobot để ping định kỳ:**
+
+1. Đăng ký miễn phí tại [uptimerobot.com](https://uptimerobot.com) → xác nhận email
+2. Dashboard → **"+ Add New Monitor"**
+3. Điền thông tin:
+
+| Field | Giá trị |
+|-------|---------|
+| Monitor Type | `HTTP(s)` |
+| Friendly Name | `CoffeeBlend Laravel` |
+| URL | `https://TÊN-APP.onrender.com/up` |
+| Monitoring Interval | `5 minutes` |
+
+4. (Tuỳ chọn) Phần **"Alert Contacts"** → thêm email để nhận thông báo khi app down
+5. Click **"Create Monitor"**
+
+> **Dùng `/up` thay vì `/`** – `/up` là health check endpoint có sẵn của Laravel 11 (định nghĩa trong `bootstrap/app.php`), không query DB, không render Blade, nhanh hơn và ít tốn tài nguyên hơn nhiều so với ping trang chủ.
+
+**Giải quyết triệt để:** Nâng lên **Starter plan** ($7/month) – không bao giờ sleep, không bị giới hạn instance hours.
+
+---
+
+### ⚠️ Vượt quá 750 Free Instance Hours – App bị suspend
+
+**Triệu chứng:** Render thông báo `Free Instance Hours` gần đạt hoặc đã đạt `750 hours/month`, app bị dừng hoàn toàn.
+
+**Nguyên nhân – Nghịch lý UptimeRobot:**
+
+Render tính giờ theo thời gian app **đang chạy**, không phải theo lượt truy cập thật. Giới hạn 750 giờ/tháng được chia chung cho **tất cả** Web Service free trong cùng một account.
+
+Nếu có **3 app** đều dùng UptimeRobot ping mỗi 5 phút → cả 3 chạy 24/7:
+
+```
+3 app × 24 giờ × 30 ngày = 2,160 giờ cần
+                            750 giờ có
+→ Hết hạn sau ~10 ngày → Render suspend tất cả
+```
+
+Nếu **không** dùng UptimeRobot → app tự ngủ khi không có người dùng thật → 750 giờ đủ dùng cả tháng.
+
+> ⚠️ UptimeRobot giữ app tỉnh nhưng đồng thời tiêu hết instance hours sớm hơn nhiều so với để app tự ngủ. Khi account hết 750 giờ, **tất cả** app free bị suspend – còn tệ hơn sleep.
+
+**Giải pháp tuỳ tình huống:**
+
+| Tình huống | Giải pháp |
+|------------|-----------|
+| Có 1 app quan trọng, các app còn lại là demo | Chỉ giữ UptimeRobot cho **1 app** duy nhất (1 × 24h × 30 = 720h < 750h ✅), pause monitor của các app còn lại |
+| Tất cả đều ít người dùng | Tắt UptimeRobot cho tất cả, chấp nhận delay ~30 giây khi có người vào |
+| Cần 1 app luôn sẵn sàng | Nâng app đó lên **Starter ($7/month)** – không tính vào 750h free, không bao giờ sleep |
+
+**Cách pause monitor trên UptimeRobot:** Dashboard → chọn monitor → click **"Pause"** (có thể bật lại bất cứ lúc nào).
 
 ---
 

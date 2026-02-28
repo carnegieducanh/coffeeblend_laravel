@@ -6,7 +6,7 @@
 }
 .scroll-hint {
   position: absolute;
-  bottom: 28px;
+  bottom: 36px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -15,6 +15,11 @@
   z-index: 5;
   pointer-events: none;
   white-space: nowrap;
+}
+@media (max-width: 767.98px) {
+  .scroll-hint {
+    bottom: 60px;
+  }
 }
 .scroll-hint span {
   display: block;

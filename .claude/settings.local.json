@@ -17,7 +17,16 @@
       "Bash(git push origin main)",
       "Bash(git add bootstrap/app.php)",
       "Bash(git add DEPLOYMENT.md)",
-      "Bash(git add resources/views/layouts/admin.blade.php)"
+      "Bash(git add resources/views/layouts/admin.blade.php)",
+      "Bash(php artisan --version)",
+      "Bash(git add database/migrations/2026_02_28_000001_refactor_name_columns_in_bookings_and_orders.php database/migrations/2024_01_01_000004_create_orders_table.php database/migrations/2024_01_01_000005_create_bookings_table.php app/Models/Product/Booking.php app/Models/Product/Order.php app/Http/Controllers/Products/ProductsController.php resources/views/admins/allbookings.blade.php resources/views/admins/allorders.blade.php resources/views/home/_intro.blade.php resources/views/products/checkout.blade.php resources/views/users/bookings.blade.php resources/views/users/orders.blade.php)",
+      "Bash(xargs ls -lh)",
+      "Bash(wc -l /c/xampp/htdocs/coffeeblend_laravel/resources/views/**/*.blade.php)",
+      "Bash(php artisan view:clear)",
+      "Bash(php artisan cache:clear)",
+      "Bash(php artisan route:clear)",
+      "Bash(php artisan config:clear)",
+      "Bash(php artisan route:list --name=about)"
     ]
   }
 }

@@ -11,10 +11,11 @@
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
           <h1 class="mb-3 mt-5 bread">{{ __('messages.my_orders') }}</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.my_orders') }}</span>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span>
+            <span>{{ __('messages.my_orders') }}</span>
           </p>
         </div>
-
+        @include('partials._scroll_hint')
       </div>
     </div>
   </div>
@@ -54,7 +55,8 @@
                 <td class="total">{{ $order->status }}</td>
                 <td class="total">
                   @if($order->status == "Delivered")
-                  <a class="btn btn-primary" href="{{ route('write.reviews') }}">{{ __('messages.btn_write_review') }}</a>
+                  <a class="btn btn-primary"
+                    href="{{ route('write.reviews') }}">{{ __('messages.btn_write_review') }}</a>
                   @else
                   <p>{{ __('messages.not_available_yet') }}</p>
                   @endif

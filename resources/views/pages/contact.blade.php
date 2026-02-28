@@ -5,7 +5,7 @@
 
 <section class="home-slider owl-carousel">
 
-  <div class="slider-item" style="background-image: url({{ asset('assets/images/bg_3.jpg') }});">
+  <div class="slider-item" style="background-image: url({{ asset('assets/images/bg_3.jpg') }}); position: relative;">
     <div class="overlay"></div>
     <div class="container">
       <div class="row slider-text justify-content-center align-items-center">
@@ -18,6 +18,7 @@
 
       </div>
     </div>
+    @include('partials._scroll_hint')
   </div>
 </section>
 

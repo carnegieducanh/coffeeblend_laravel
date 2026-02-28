@@ -30,11 +30,11 @@ AOS.init({
 
     // loader
     var loader = function () {
-        setTimeout(function () {
+        $(window).on("load", function () {
             if ($("#ftco-loader").length > 0) {
                 $("#ftco-loader").removeClass("show");
             }
-        }, 1);
+        });
     };
     loader();
 
@@ -224,7 +224,7 @@ AOS.init({
                                     }
                                     el.removeClass("item-animate");
                                 },
-                                k * 50,
+                                k * 75,
                                 "easeInOutExpo",
                             );
                         });

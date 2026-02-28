@@ -10,9 +10,11 @@
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
           <h1 class="mb-3 mt-5 bread">{{ __('messages.write_review') }}</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.write_review') }}</span></p>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span>
+            <span>{{ __('messages.write_review') }}</span>
+          </p>
         </div>
-
+        @include('partials._scroll_hint')
       </div>
     </div>
   </div>
@@ -35,7 +37,8 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="streetaddress">{{ __('messages.write_review') }}</label>
-              <textarea name="review" cols="10" rows="10" class="form-control" placeholder="{{ __('messages.placeholder_write_review') }}"></textarea>
+              <textarea name="review" cols="10" rows="10" class="form-control"
+                placeholder="{{ __('messages.placeholder_write_review') }}"></textarea>
             </div>
           </div>
 
@@ -44,7 +47,8 @@
           <div class="col-md-12">
             <div class="form-group mt-4">
               <div class="radio">
-                <button type="submit" name="submit" class="btn btn-primary py-3 px-4">{{ __('messages.btn_write_review') }}</button>
+                <button type="submit" name="submit"
+                  class="btn btn-primary py-3 px-4">{{ __('messages.btn_write_review') }}</button>
 
               </div>
             </div>

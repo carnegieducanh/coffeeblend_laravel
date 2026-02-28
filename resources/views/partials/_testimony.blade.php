@@ -38,6 +38,17 @@
 }
 </style>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const track = document.querySelector('.review-track');
+    if (!track) return;
+    // Giữ tốc độ cố định: 28.8 px/s (= 1440px / 50s, tương ứng Home có 4 reviews)
+    const pixelsPerSecond = 28.8;
+    const halfWidth = track.scrollWidth / 2;
+    track.style.animationDuration = (halfWidth / pixelsPerSecond).toFixed(1) + 's';
+  });
+</script>
+
 <section class="ftco-section img" id="ftco-testimony" style="background-image: url(images/bg_1.jpg);"
   data-stellar-background-ratio="0.5">
   <div class="overlay"></div>
