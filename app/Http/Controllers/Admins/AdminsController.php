@@ -136,7 +136,7 @@ class AdminsController extends Controller
 
     public function displayProducts()
     {
-        $products = Product::select()->orderBy('id', 'desc')->get();
+        $products = Product::orderBy('id', 'desc')->paginate(7);
 
         return view('admins.allproducts', compact('products'));
     }

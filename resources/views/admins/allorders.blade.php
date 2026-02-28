@@ -54,7 +54,7 @@
 
               <td>{{ $order->status }}</td>
               <td><a href="{{ route('edit.order', $order->id) }}"
-                  class="btn btn-warning  text-white text-center ">change status</a></td>
+                  class="btn btn-primary text-center">change status</a></td>
 
               <td><a href="{{ route('delete.order', $order->id) }}" class="btn btn-danger  text-center ">delete</a></td>
             </tr>
