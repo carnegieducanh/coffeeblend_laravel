@@ -11,7 +11,7 @@
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
           <h1 class="mb-3 mt-5 bread">Cart</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Cart</span></p>
         </div>
 
       </div>
@@ -49,7 +49,8 @@
                       class="icon-close"></span></a></td>
 
                 <td class="image-prod"><img width="100" height="80"
-                    src="{{ str_starts_with($cartProduct->image, 'http') ? $cartProduct->image : asset('assets/images/'.$cartProduct->image) }}"></td>
+                    src="{{ str_starts_with($cartProduct->image, 'http') ? $cartProduct->image : asset('assets/images/'.$cartProduct->image) }}">
+                </td>
 
                 <td class="product-name">
                   <h3>{{ $cartProduct->name }}</h3>

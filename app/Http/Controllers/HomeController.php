@@ -46,6 +46,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        return view('pages.about');
+        $reviews = Review::select()->orderBy('id', 'desc')->get();
+        return view('pages.about', compact('reviews'));
     }
 }

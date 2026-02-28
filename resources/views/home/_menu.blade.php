@@ -5,9 +5,7 @@
         <div class="heading-section text-md-right ftco-animate">
           <span class="subheading">Discover</span>
           <h2 class="mb-4">Our Menu</h2>
-          <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-            live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
-            language ocean.</p>
+          <p class="mb-4">From rich espresso classics to seasonal Japanese-inspired specials, our menu is crafted to delight every palate. Explore our full selection of hot and cold drinks, light bites, and handcrafted pastries — all made fresh daily at our Shibuya kitchen.</p>
           <p><a href="{{ route('products.menu') }}" class="btn btn-primary btn-outline-primary px-4 py-3">View Full
               Menu</a></p>
         </div>

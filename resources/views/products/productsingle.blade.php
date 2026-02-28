@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+.btn.btn-primary.btn-outline-primary.py-3.px-5:hover {
+  color: #fff !important;
+}
+</style>
 
 <section class="home-slider owl-carousel">
 
@@ -11,7 +16,8 @@
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
           <h1 class="mb-3 mt-5 bread">Product Detail</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Product Detail</span></p>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Product
+              Detail</span></p>
         </div>
 
       </div>
@@ -30,8 +36,11 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6 mb-5 ftco-animate">
-        <a href="{{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }}" class="image-popup">
-          <img src="{{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }}" class="img-fluid" alt="Colorlib Template">
+        <a href="{{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }}"
+          class="image-popup">
+          <img
+            src="{{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }}"
+            class="img-fluid" alt="Colorlib Template">
         </a>
       </div>
       <div class="col-lg-6 product-details pl-md-5 ftco-animate">
@@ -56,9 +65,9 @@
           <input type="hidden" name="price" value="{{ $product->price }}">
           <input type="hidden" name="image" value="{{ $product->image }}">
           @if(Auth::check() && $checkingInCart > 0)
-            <button style="background-color: #555;" class="text-white btn py-3 px-5" disabled>Already in Cart</button>
+          <a style="background-color: #555;" class="text-white btn py-3 px-5" disabled>Already in Cart</a>
           @else
-            <button type="submit" name="submit" class="btn btn-primary py-3 px-5" style="color: #000;">Add to Cart</button>
+          <button type="submit" name="submit" class="btn btn-primary btn-outline-primary py-3 px-5">Add to Cart</button>
           @endif
         </form>
       </div>
@@ -69,13 +78,14 @@
 
 </section>
 
-<section class="ftco-section">
+<section class=" ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate text-center">
         <span class="subheading">Discover</span>
         <h2 class="mb-4">Related products</h2>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
+          the blind
           texts.</p>
       </div>
     </div>
@@ -87,7 +97,8 @@
           <a href="{{ route('product.single', $relatedProduct->id) }}" class="img"
             style="background-image: url({{ str_starts_with($relatedProduct->image, 'http') ? $relatedProduct->image : asset('assets/images/'.$relatedProduct->image) }});"></a>
           <div class="text text-center pt-4">
-            <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a></h3>
+            <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a>
+            </h3>
             <p>
               {{ $relatedProduct->description }}
             </p>

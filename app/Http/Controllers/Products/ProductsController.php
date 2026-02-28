@@ -168,11 +168,9 @@ class ProductsController extends Controller
     public function menu()
     {
 
-        $desserts = Product::select()->where("type", "desserts")->orderBy('id', 'desc')
-            ->take(4)->get();
+        $desserts = Product::select()->where("type", "desserts")->orderBy('id', 'desc')->get();
 
-        $drinks = Product::select()->where("type", "drinks")->orderBy('id', 'desc')
-            ->take(4)->get();
+        $drinks = Product::select()->where("type", "drinks")->orderBy('id', 'desc')->get();
 
 
         return view('products.menu', compact('desserts', 'drinks'));

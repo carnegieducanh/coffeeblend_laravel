@@ -4,8 +4,7 @@
       <div class="col-md-7 heading-section ftco-animate text-center">
         <span class="subheading">Discover</span>
         <h2 class="mb-4">Best Coffee Sellers</h2>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
-          texts.</p>
+        <p>These are the drinks our Tokyo regulars keep coming back for. Handcrafted by our baristas and loved by the community — taste the difference for yourself.</p>
       </div>
     </div>
     <div class="row">
