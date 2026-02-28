@@ -30,7 +30,15 @@
     <div class="row">
       <div class="col-md-12 ftco-animate">
         <div class="cart-list">
-          <table class="table-dark" style="width: 1100px">
+          <table class="table-dark" style="width: 1100px; table-layout: fixed;">
+            <colgroup>
+              <col style="width: 50px;">
+              <col style="width: 120px;">
+              <col style="width: auto;">
+              <col style="width: 110px;">
+              <col style="width: 180px;">
+              <col style="width: 110px;">
+            </colgroup>
             <thead style="background-color: #c49b63; height: 60px">
               <tr class="text-center">
                 <th>&nbsp;</th>
@@ -57,16 +65,23 @@
                   <p>{{ $cartProduct->description }}</p>
                 </td>
 
-                <td class="price">${{ $cartProduct->price }}</td>
+                <td class="price" data-unit-price="{{ $cartProduct->price }}">${{ number_format($cartProduct->price, 2) }}</td>
 
                 <td>
-                  <div class="input-group mb-3">
-                    <input disabled type="text" name="quantity" class="quantity form-control input-number" value="1"
-                      min="1" max="100">
+                  <div class="input-group justify-content-center" style="width: 130px; margin: 0 auto;">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-outline-secondary qty-btn qty-minus" type="button">−</button>
+                    </div>
+                    <input type="text" name="quantity" class="quantity form-control input-number text-center"
+                      value="1" min="1" max="100" data-price="{{ $cartProduct->price }}"
+                      style="max-width: 50px; text-align: center;">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary qty-btn qty-plus" type="button">+</button>
+                    </div>
                   </div>
                 </td>
 
-                <td class="total">${{ $cartProduct->price }}</td>
+                <td class="total row-total">${{ number_format($cartProduct->price, 2) }}</td>
               </tr><!-- END TR-->
               @endforeach
 
@@ -86,7 +101,7 @@
           <h3>Cart Totals</h3>
           <p class="d-flex">
             <span>Subtotal</span>
-            <span>${{ $totalPrice }}</span>
+            <span id="cart-subtotal">${{ number_format($totalPrice, 2) }}</span>
           </p>
           <p class="d-flex">
             <span>Delivery</span>
@@ -95,13 +110,13 @@
           <hr>
           <p class="d-flex total-price">
             <span>Total</span>
-            <span>${{ $totalPrice }}</span>
+            <span id="cart-total">${{ number_format($totalPrice, 2) }}</span>
           </p>
         </div>
         @if($cartProducts->count() > 0)
         <form method="POST" action="{{ route('prepare.checkout') }}">
           @csrf
-          <input name="price" type="hidden" value="{{ $totalPrice }}">
+          <input name="price" type="hidden" value="{{ $totalPrice }}" id="checkout-price">
           <input type="submit" value="Proceed to Checkout" name="submit" class="btn btn-primary py-3 px-4">
 
         </form>
@@ -114,63 +129,94 @@
   </div>
 </section>
 
+@if($relatedProducts->count() > 0)
 <section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate text-center">
         <span class="subheading">Discover</span>
-        <h2 class="mb-4">Related products</h2>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
-          texts.</p>
+        <h2 class="mb-4">You might also like</h2>
+        <p>Explore more from our menu — handpicked just for you.</p>
       </div>
     </div>
     <div class="row">
+      @foreach($relatedProducts as $relatedProduct)
       <div class="col-md-3">
         <div class="menu-entry">
-          <a href="#" class="img" style="background-image: url(images/menu-1.jpg);"></a>
+          <a href="{{ route('product.single', $relatedProduct->id) }}" class="img"
+            style="background-image: url({{ str_starts_with($relatedProduct->image, 'http') ? $relatedProduct->image : asset('assets/images/'.$relatedProduct->image) }});"></a>
           <div class="text text-center pt-4">
-            <h3><a href="#">Coffee Capuccino</a></h3>
-            <p>A small river named Duden flows by their place and supplies</p>
-            <p class="price"><span>$5.90</span></p>
-            <p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+            <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a></h3>
+            <p>{{ Str::limit($relatedProduct->description, 60) }}</p>
+            <p class="price"><span>${{ number_format($relatedProduct->price, 2) }}</span></p>
+            <p><a href="{{ route('product.single', $relatedProduct->id) }}" class="btn btn-primary btn-outline-primary">View</a></p>
           </div>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="menu-entry">
-          <a href="#" class="img" style="background-image: url(images/menu-2.jpg);"></a>
-          <div class="text text-center pt-4">
-            <h3><a href="#">Coffee Capuccino</a></h3>
-            <p>A small river named Duden flows by their place and supplies</p>
-            <p class="price"><span>$5.90</span></p>
-            <p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="menu-entry">
-          <a href="#" class="img" style="background-image: url(images/menu-3.jpg);"></a>
-          <div class="text text-center pt-4">
-            <h3><a href="#">Coffee Capuccino</a></h3>
-            <p>A small river named Duden flows by their place and supplies</p>
-            <p class="price"><span>$5.90</span></p>
-            <p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="menu-entry">
-          <a href="#" class="img" style="background-image: url(images/menu-4.jpg);"></a>
-          <div class="text text-center pt-4">
-            <h3><a href="#">Coffee Capuccino</a></h3>
-            <p>A small river named Duden flows by their place and supplies</p>
-            <p class="price"><span>$5.90</span></p>
-            <p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>
+@endif
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  function updateTotals() {
+    let subtotal = 0;
+
+    document.querySelectorAll('.quantity').forEach(function (input) {
+      const qty = parseInt(input.value) || 1;
+      const price = parseFloat(input.dataset.price) || 0;
+      const row = input.closest('tr');
+      const rowTotal = row.querySelector('.row-total');
+      const lineTotal = qty * price;
+
+      rowTotal.textContent = '$' + lineTotal.toFixed(2);
+      subtotal += lineTotal;
+    });
+
+    document.getElementById('cart-subtotal').textContent = '$' + subtotal.toFixed(2);
+    document.getElementById('cart-total').textContent = '$' + subtotal.toFixed(2);
+
+    const checkoutPrice = document.getElementById('checkout-price');
+    if (checkoutPrice) checkoutPrice.value = subtotal.toFixed(2);
+  }
+
+  document.querySelectorAll('.qty-minus').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const input = this.closest('.input-group').querySelector('.quantity');
+      let val = parseInt(input.value) || 1;
+      if (val > 1) {
+        input.value = val - 1;
+        updateTotals();
+      }
+    });
+  });
+
+  document.querySelectorAll('.qty-plus').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const input = this.closest('.input-group').querySelector('.quantity');
+      let val = parseInt(input.value) || 1;
+      if (val < 100) {
+        input.value = val + 1;
+        updateTotals();
+      }
+    });
+  });
+
+  document.querySelectorAll('.quantity').forEach(function (input) {
+    input.addEventListener('change', function () {
+      let val = parseInt(this.value) || 1;
+      if (val < 1) val = 1;
+      if (val > 100) val = 100;
+      this.value = val;
+      updateTotals();
+    });
+  });
+
+});
+</script>
 
 @endsection

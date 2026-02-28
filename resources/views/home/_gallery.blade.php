@@ -52,6 +52,14 @@
       </div>
       <div class="gallery-item ftco-animate">
         <a href="gallery.html" class="gallery img d-flex align-items-center"
+          style="background-image: url({{ asset('assets/images/gallery-2.jpg') }});">
+          <div class="icon mb-4 d-flex align-items-center justify-content-center">
+            <span class="icon-search"></span>
+          </div>
+        </a>
+      </div>
+      <div class="gallery-item ftco-animate">
+        <a href="gallery.html" class="gallery img d-flex align-items-center"
           style="background-image: url({{ asset('assets/images/gallery-3.jpg') }});">
           <div class="icon mb-4 d-flex align-items-center justify-content-center">
             <span class="icon-search"></span>
@@ -69,14 +77,6 @@
       <div class="gallery-item ftco-animate">
         <a href="gallery.html" class="gallery img d-flex align-items-center"
           style="background-image: url({{ asset('assets/images/gallery-1.jpg') }});">
-          <div class="icon mb-4 d-flex align-items-center justify-content-center">
-            <span class="icon-search"></span>
-          </div>
-        </a>
-      </div>
-      <div class="gallery-item ftco-animate">
-        <a href="gallery.html" class="gallery img d-flex align-items-center"
-          style="background-image: url({{ asset('assets/images/gallery-3.jpg') }});">
           <div class="icon mb-4 d-flex align-items-center justify-content-center">
             <span class="icon-search"></span>
           </div>
@@ -86,7 +86,7 @@
       {{-- Nhân đôi để tạo vòng lặp liền mạch --}}
       <div class="gallery-item">
         <a href="gallery.html" class="gallery img d-flex align-items-center"
-          style="background-image: url({{ asset('assets/images/gallery-1.jpg') }});">
+          style="background-image: url({{ asset('assets/images/gallery-2.jpg') }});">
           <div class="icon mb-4 d-flex align-items-center justify-content-center">
             <span class="icon-search"></span>
           </div>
@@ -118,7 +118,7 @@
       </div>
       <div class="gallery-item">
         <a href="gallery.html" class="gallery img d-flex align-items-center"
-          style="background-image: url({{ asset('assets/images/gallery-3.jpg') }});">
+          style="background-image: url({{ asset('assets/images/gallery-2.jpg') }});">
           <div class="icon mb-4 d-flex align-items-center justify-content-center">
             <span class="icon-search"></span>
           </div>

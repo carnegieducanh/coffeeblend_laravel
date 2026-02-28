@@ -51,7 +51,8 @@
           <p class="mb-4">From rich espresso classics to seasonal Japanese-inspired specials, our menu is crafted to
             delight every palate. Explore our full selection of hot and cold drinks, light bites, and handcrafted
             pastries — all made fresh daily at our Shibuya kitchen.</p>
-          <p><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">View Full Menu</a></p>
+          <p><a href="{{ route('products.menu') }}" class="btn btn-primary btn-outline-primary px-4 py-3">View Full
+              Menu</a></p>
         </div>
       </div>
       <div class="col-md-6">

@@ -50,12 +50,20 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
+                @auth
+                <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
+                @else
                 <input type="text" class="form-control" placeholder="Your Name">
+                @endauth
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
+                @auth
+                <input type="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
+                @else
                 <input type="text" class="form-control" placeholder="Your Email">
+                @endauth
               </div>
             </div>
           </div>

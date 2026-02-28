@@ -68,7 +68,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h3 class="mb-5 heading-pricing ftco-animate">Desserts</h3>
+        <h3 class="mb-5 heading-pricing">Desserts</h3>
         <div style="max-height: 440px; overflow-y: auto; padding-right: 8px;">
           @foreach ($desserts as $dessert)
           <a href="{{ route('product.single', $dessert->id) }}" class="pricing-entry d-flex ftco-animate"
@@ -91,7 +91,7 @@
       </div>
 
       <div class="col-md-6">
-        <h3 class="mb-5 heading-pricing ftco-animate">Drinks</h3>
+        <h3 class="mb-5 heading-pricing">Drinks</h3>
         <div style="max-height: 440px; overflow-y: auto; padding-right: 8px;">
           @foreach ($drinks as $drink)
           <a href="{{ route('product.single', $drink->id) }}" class="pricing-entry d-flex ftco-animate"

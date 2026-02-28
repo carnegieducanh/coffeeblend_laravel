@@ -9,7 +9,11 @@
           @csrf
           <div class="d-md-flex">
             <div class="form-group">
+              @auth
+              <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" readonly>
+              @else
               <input type="text" name="name" class="form-control" placeholder="Name">
+              @endauth
               @error('name')
               <span class="booking-field-error">{{ $message }}</span>
               @enderror
@@ -70,6 +74,29 @@
           /* Màu xám Bootstrap */
           color: black !important;
           border-color: #6c757d !important;
+        }
+
+        /* Datepicker: ngày trong quá khứ làm mờ */
+        .datepicker table tr td.disabled,
+        .datepicker table tr td.disabled:hover {
+          color: #ccc !important;
+          opacity: 0.4;
+          cursor: not-allowed;
+          font-weight: normal !important;
+        }
+
+        /* Datepicker: ngày từ hôm nay trở đi in đậm */
+        .datepicker table tr td.day:not(.disabled) {
+          font-weight: 700;
+          color: #1d150b;
+        }
+
+        /* Ngày hôm nay highlight thêm màu amber */
+        .datepicker table tr td.today:not(.active) {
+          background: #fff3e0 !important;
+          border-color: #c49b63 !important;
+          color: #c49b63 !important;
+          font-weight: 700;
         }
         </style>
       </div>

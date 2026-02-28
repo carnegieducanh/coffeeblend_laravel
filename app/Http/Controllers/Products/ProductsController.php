@@ -69,11 +69,16 @@ class ProductsController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-
         $totalPrice = Cart::where('user_id', Auth::user()->id)
             ->sum('price');
 
-        return view('products.cart', compact('cartProducts', 'totalPrice'));
+        $cartProIds = $cartProducts->pluck('pro_id')->toArray();
+        $relatedProducts = Product::whereNotIn('id', $cartProIds)
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+
+        return view('products.cart', compact('cartProducts', 'totalPrice', 'relatedProducts'));
     }
 
     public function deleteProductCart($id)

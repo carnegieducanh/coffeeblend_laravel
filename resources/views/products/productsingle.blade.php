@@ -5,6 +5,34 @@
 .btn.btn-primary.btn-outline-primary.py-3.px-5:hover {
   color: #fff !important;
 }
+
+/* Related products: card có chiều cao bằng nhau, giá & nút thẳng hàng */
+.related-section .col-md-3 {
+  display: flex;
+  margin-bottom: 2rem;
+}
+.related-section .menu-entry {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.related-section .menu-entry .text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.related-section .related-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  overflow: hidden;
+  flex: 1;
+  margin-bottom: 0.75rem;
+}
+.related-section .menu-entry .price {
+  margin-bottom: 0.5rem;
+}
 </style>
 
 <section class="home-slider owl-carousel">
@@ -78,41 +106,36 @@
 
 </section>
 
-<section class=" ftco-section">
+@if($relatedProducts->count() > 0)
+<section class="ftco-section related-section">
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate text-center">
         <span class="subheading">Discover</span>
-        <h2 class="mb-4">Related products</h2>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-          the blind
-          texts.</p>
+        <h2 class="mb-4">Related Products</h2>
+        <p>More from the same category — you might love these too.</p>
       </div>
     </div>
     <div class="row">
-
       @foreach ($relatedProducts as $relatedProduct)
       <div class="col-md-3">
         <div class="menu-entry">
           <a href="{{ route('product.single', $relatedProduct->id) }}" class="img"
             style="background-image: url({{ str_starts_with($relatedProduct->image, 'http') ? $relatedProduct->image : asset('assets/images/'.$relatedProduct->image) }});"></a>
           <div class="text text-center pt-4">
-            <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a>
-            </h3>
-            <p>
-              {{ $relatedProduct->description }}
-            </p>
-            <p class="price"><span>${{ $relatedProduct->price }}</span></p>
+            <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a></h3>
+            <p class="related-desc">{{ $relatedProduct->description }}</p>
+            <p class="price"><span>${{ number_format($relatedProduct->price, 2) }}</span></p>
             <p><a href="{{ route('product.single', $relatedProduct->id) }}"
-                class="btn btn-primary btn-outline-primary">Show</a></p>
+                class="btn btn-primary btn-outline-primary">View Details</a></p>
           </div>
         </div>
       </div>
       @endforeach
-
     </div>
   </div>
 </section>
+@endif
 
 
 @endsection

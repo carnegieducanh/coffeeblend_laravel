@@ -4,7 +4,8 @@
       <div class="col-md-7 heading-section ftco-animate text-center">
         <span class="subheading">Discover</span>
         <h2 class="mb-4">Best Coffee Sellers</h2>
-        <p>These are the drinks our Tokyo regulars keep coming back for. Handcrafted by our baristas and loved by the community — taste the difference for yourself.</p>
+        <p>These are the drinks our Tokyo regulars keep coming back for. Handcrafted by our baristas and loved by the
+          community — taste the difference for yourself.</p>
       </div>
     </div>
     <div class="row">
@@ -12,14 +13,15 @@
       @foreach ($products as $product)
       <div class="col-md-3 d-flex">
         <div class="menu-entry w-100 d-flex flex-column">
-          <a href="#" class="img" style="background-image: url({{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }});"></a>
+          <a href="#" class="img"
+            style="background-image: url({{ str_starts_with($product->image, 'http') ? $product->image : asset('assets/images/'.$product->image) }});"></a>
           <div class="text text-center pt-4 d-flex flex-column flex-grow-1">
             <h3><a href="{{ route('product.single', $product->id) }}">{{ $product->name }}</a></h3>
             <p class="product-description">{{ $product->description }}</p>
             <div class="mt-auto">
               <p class="price"><span>${{ $product->price }}</span></p>
-              <p><a href="{{ route('product.single', $product->id) }}"
-                  class="btn btn-primary btn-outline-primary">Show</a></p>
+              <p><a href="{{ route('product.single', $product->id) }}" class="btn btn-primary btn-outline-primary">View
+                  Details</a></p>
             </div>
           </div>
         </div>
