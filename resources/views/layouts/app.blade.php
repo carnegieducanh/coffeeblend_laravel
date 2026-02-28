@@ -122,6 +122,7 @@
 
   <!-- Scripts -->
   @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+  @yield('styles')
 </head>
 
 <body data-lang="{{ app()->getLocale() }}">
@@ -184,6 +185,9 @@
                 </a>
                 <a class="dropdown-item" href="{{ route('users.bookings') }}">
                   {{ __('messages.nav_my_bookings') }}
+                </a>
+                <a class="dropdown-item" href="{{ route('users.account') }}">
+                  {{ __('messages.nav_my_account') }}
                 </a>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

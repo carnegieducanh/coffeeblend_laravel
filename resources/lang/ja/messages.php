@@ -12,6 +12,7 @@ return [
     'nav_logout'      => 'ログアウト',
     'nav_my_orders'   => '注文履歴',
     'nav_my_bookings' => '予約履歴',
+    'nav_my_account'  => 'マイアカウント',
 
     // ── Hero Slider ──────────────────────────────────────────────────────────
     'hero_slide1_sub'   => 'CoffeeBlend Tokyoへようこそ',
@@ -180,6 +181,15 @@ return [
     'col_time'      => '時間',
     'col_phone_header' => '電話番号',
     'no_bookings'   => '予約履歴がまだありません。',
+
+    // ── My Account ───────────────────────────────────────────────────────────
+    'my_account'              => 'マイアカウント',
+    'label_current_password'  => '現在のパスワード',
+    'label_new_password'      => '新しいパスワード',
+    'placeholder_new_password'=> '空白のままにすると変更しません',
+    'btn_save_changes'        => '変更を保存',
+    'flash_account_updated'   => 'アカウント情報を更新しました。',
+    'flash_wrong_password'    => '現在のパスワードが正しくありません。',
 
     // ── Write Review ─────────────────────────────────────────────────────────
     'write_review'             => 'レビューを書く',

@@ -49,6 +49,9 @@ Route::group(['prefix' => 'users'], function () {
     //users pages
     Route::get('/orders', [App\Http\Controllers\Users\UsersController::class, 'displayOrders'])->name('users.orders')->middleware('auth:web');
     Route::get('/bookings', [App\Http\Controllers\Users\UsersController::class, 'displayBookings'])->name('users.bookings')->middleware('auth:web');
+    //my account
+    Route::get('/account', [App\Http\Controllers\Users\UsersController::class, 'myAccount'])->name('users.account')->middleware('auth:web');
+    Route::post('/account', [App\Http\Controllers\Users\UsersController::class, 'updateAccount'])->name('users.account.update')->middleware('auth:web');
     //write reviews
     Route::get('/write-reviews', [App\Http\Controllers\Users\UsersController::class, 'writeReview'])->name('write.reviews')->middleware('auth:web');
     Route::post('/write-reviews', [App\Http\Controllers\Users\UsersController::class, 'proccessWriteReview'])->name('proccess.write.review')->middleware('auth:web');

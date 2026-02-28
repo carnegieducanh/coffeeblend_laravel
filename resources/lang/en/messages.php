@@ -12,6 +12,7 @@ return [
     'nav_logout'      => 'Logout',
     'nav_my_orders'   => 'My Orders',
     'nav_my_bookings' => 'My Bookings',
+    'nav_my_account'  => 'My Account',
 
     // ── Hero Slider ──────────────────────────────────────────────────────────
     'hero_slide1_sub'   => 'Welcome to CoffeeBlend Tokyo',
@@ -180,6 +181,15 @@ return [
     'col_time'      => 'Time',
     'col_phone_header' => 'Phone',
     'no_bookings'   => 'You have no bookings just yet.',
+
+    // ── My Account ───────────────────────────────────────────────────────────
+    'my_account'              => 'My Account',
+    'label_current_password'  => 'Current Password',
+    'label_new_password'      => 'New Password',
+    'placeholder_new_password'=> 'Leave blank to keep current password',
+    'btn_save_changes'        => 'Save Changes',
+    'flash_account_updated'   => 'Account information updated successfully.',
+    'flash_wrong_password'    => 'Current password is incorrect.',
 
     // ── Write Review ─────────────────────────────────────────────────────────
     'write_review'           => 'Write Review',
