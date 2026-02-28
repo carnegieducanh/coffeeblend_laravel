@@ -4,7 +4,7 @@
    ============================================= */
 
 body {
-    background-image: url('../images/bg_1.jpg');
+    background-image: url("../images/bg_1.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -55,7 +55,10 @@ body {
     color: rgba(255, 255, 255, 0.8) !important;
     padding: 10px 16px 10px 20px;
     border-left: 3px solid transparent;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    transition:
+        background 0.2s,
+        color 0.2s,
+        border-color 0.2s;
     font-size: 0.9rem;
 }
 
@@ -207,8 +210,10 @@ main.py-4 {
 /* ── Desktop sidebar (≥992px) ─────────────────── */
 @media (min-width: 992px) {
     #wrapper {
+        /* margin: 0 auto; */
         margin-left: 200px;
         padding: 90px 15px 15px;
+        /* width: 700px; */
     }
 
     .navbar-nav.side-nav {

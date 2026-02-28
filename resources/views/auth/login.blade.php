@@ -75,6 +75,12 @@
                   <button name="submit" type="submit"
                     class="btn btn-primary py-3 px-4">{{ __('messages.btn_login') }}</button>
                 </div>
+                <div class="mt-3">
+                  <a href="{{ route('view.login') }}"
+                    style="color: #888; font-size: 0.85rem; text-decoration: none;">
+                    {{ __('messages.login_as_admin') }}
+                  </a>
+                </div>
               </div>
             </div>
 

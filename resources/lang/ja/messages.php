@@ -211,6 +211,7 @@ return [
     'label_username'         => 'お名前',
     'label_confirm_password' => 'パスワード（確認）',
     'btn_register'           => '登録する',
+    'login_as_admin'         => 'または管理者としてログイン',
 
     // ── Flash Messages ───────────────────────────────────────────────────────
     'flash_login_success'       => 'ログインしました。おかえりなさい、:name！',

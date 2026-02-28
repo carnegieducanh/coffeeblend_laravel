@@ -16,10 +16,8 @@ class CheckForAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->url('admin/login')) {
-            if (isset(Auth::guard('admin')->user()->name)) {
-                return redirect()->route('admins.dashboard');
-            }
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admins.dashboard');
         }
 
         return $next($request);

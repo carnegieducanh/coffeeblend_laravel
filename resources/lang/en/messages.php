@@ -211,6 +211,7 @@ return [
     'label_username'         => 'Name',
     'label_confirm_password' => 'Confirm Password',
     'btn_register'           => 'Register',
+    'login_as_admin'         => 'or login as admin',
 
     // ── Flash Messages ───────────────────────────────────────────────────────
     'flash_login_success'       => 'Logged in successfully. Welcome back, :name!',

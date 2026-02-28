@@ -22,6 +22,15 @@ class AdminsController extends Controller
     }
 
 
+    public function logout(Request $request)
+    {
+        auth()->guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('view.login');
+    }
+
+
     public function checkLogin(Request $request)
     {
 
