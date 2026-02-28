@@ -58,14 +58,19 @@
                   <a class="btn btn-primary"
                     href="{{ route('write.reviews') }}">{{ __('messages.btn_write_review') }}</a>
                   @else
-                  <p>{{ __('messages.not_available_yet') }}</p>
+                  <span>{{ __('messages.not_available_yet') }}</span>
                   @endif
                 </td>
               </tr><!-- END TR-->
               @endforeach
               @else
-
-              <p class="alert alert-success">{{ __('messages.no_orders') }}</p>
+              <tr>
+                <td colspan="6" class="text-center" style="padding: 3rem 0; border: none;">
+                  <i class="icon-coffee"
+                    style="font-size: 3rem; color: #c49b63; display: block; margin-bottom: 0.75rem;"></i>
+                  <p style="color: #bbbaba; font-size: 1.05rem; margin: 0;">{{ __('messages.no_orders') }}</p>
+                </td>
+              </tr>
               @endif
 
 

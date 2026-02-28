@@ -28,26 +28,26 @@
   <!-- Set up a container element for the button -->
   <div style="margin-left: 171px;" id="paypal-button-container"></div>
   <script>
-  paypal.Buttons({
-    // Sets up the transaction when a payment button is clicked
-    createOrder: (data, actions) => {
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '{{ Session::get("price") }}'
-            // Can also reference a variable or function
-          }
-        }]
-      });
-    },
-    // Finalize the transaction after payer approval
-    onApprove: (data, actions) => {
-      return actions.order.capture().then(function(orderData) {
+    paypal.Buttons({
+      // Sets up the transaction when a payment button is clicked
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '{{ Session::get("price") }}'
+              // Can also reference a variable or function
+            }
+          }]
+        });
+      },
+      // Finalize the transaction after payer approval
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(function(orderData) {
 
-        window.location.href = 'http://127.0.0.1:8000/success';
-      });
-    }
-  }).render('#paypal-button-container');
+          window.location.href = 'http://127.0.0.1:8000/products/success';
+        });
+      }
+    }).render('#paypal-button-container');
   </script>
 
 </div>
