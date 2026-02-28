@@ -197,4 +197,15 @@ return [
     'label_username'         => 'お名前',
     'label_confirm_password' => 'パスワード（確認）',
     'btn_register'           => '登録する',
+
+    // ── Flash Messages ───────────────────────────────────────────────────────
+    'flash_login_success'       => 'ログインしました。おかえりなさい、:name！',
+    'flash_login_with_cart'     => 'ログインしました。商品をカートに追加しました。',
+    'flash_logout_success'      => 'ログアウトしました。',
+    'flash_cart_added'          => '商品をカートに追加しました。',
+    'flash_cart_deleted'        => '商品をカートから削除しました。',
+    'flash_booking_success'     => 'テーブルの予約が完了しました！',
+    'flash_booking_invalid_date'=> '無効な日付です。将来の日付を選択してください。',
+    'flash_login_required'      => 'カートに追加するにはログインが必要です。',
+    'flash_review_submitted'    => 'レビューを送信しました。',
 ];

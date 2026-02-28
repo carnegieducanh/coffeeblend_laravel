@@ -95,6 +95,29 @@
       z-index: 1;
       text-shadow: 0 1px 4px rgba(0,0,0,0.6);
     }
+    /* Flash Alerts */
+    #flash-alerts-container {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1055;
+      width: max-content;
+      max-width: 92vw;
+      padding-top: 8px;
+      pointer-events: none;
+    }
+    #flash-alerts-container .flash-alert {
+      pointer-events: auto;
+      min-width: 260px;
+      max-width: 560px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      padding-right: 2.5rem;
+    }
   </style>
 
   <!-- Scripts -->
@@ -183,6 +206,11 @@
         </div>
       </div>
     </nav>
+
+    <!-- Flash Alerts -->
+    <div id="flash-alerts-container">
+      @include('layouts._flash_alerts')
+    </div>
 
     <!-- MAIN -->
     <main>
@@ -298,6 +326,35 @@
   </script>
   <script src="{{ asset('assets/js/google-map.js') }}"></script>
   <script src="{{ asset('assets/js/main.js') }}"></script>
+
+  <script>
+    $(document).ready(function () {
+      var $navbar    = $('#ftco-navbar');
+      var $container = $('#flash-alerts-container');
+
+      if ($navbar.length && $container.length && $container.find('.flash-alert').length) {
+        var updatePos = function () {
+          $container.css('top', $navbar.outerHeight() + 'px');
+        };
+        updatePos();
+        $(window).on('resize scroll', updatePos);
+
+        // Tự động đóng alert sau 5 giây
+        setTimeout(function () {
+          $container.find('.flash-alert').fadeOut(400, function () {
+            $(this).remove();
+          });
+        }, 5000);
+      }
+
+      // Đóng thủ công bằng nút ×
+      $container.on('click', '.close', function () {
+        $(this).closest('.flash-alert').fadeOut(300, function () {
+          $(this).remove();
+        });
+      });
+    });
+  </script>
 
 </body>
 

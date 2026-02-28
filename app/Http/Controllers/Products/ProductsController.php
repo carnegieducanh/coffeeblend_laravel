@@ -47,7 +47,7 @@ class ProductsController extends Controller
             ]);
 
             return Redirect::route('login')
-                ->with('login_required', 'You must be logged in to add products to your cart.');
+                ->with('login_required', __('messages.flash_login_required'));
         }
 
         Cart::create([
@@ -58,7 +58,7 @@ class ProductsController extends Controller
             "user_id"  => Auth::user()->id,
         ]);
 
-        return Redirect::route('product.single', $id)->with('success', 'Product added to cart successfully.');
+        return Redirect::route('product.single', $id)->with('success', __('messages.flash_cart_added'));
     }
 
 
@@ -92,7 +92,7 @@ class ProductsController extends Controller
 
 
         if ($deleteProducCart) {
-            return Redirect::route('cart')->with(['delete' => "product deleted from cart succesffully"]);
+            return Redirect::route('cart')->with(['delete' => __('messages.flash_cart_deleted')]);
         }
     }
 
@@ -162,10 +162,10 @@ class ProductsController extends Controller
             $bookTables = Booking::create($request->all());
 
             if ($bookTables) {
-                return Redirect::route('home')->with(['booking' => "you booked a table successfully"]);
+                return Redirect::route('home')->with(['booking' => __('messages.flash_booking_success')]);
             }
         } else {
-            return Redirect::route('home')->with(['date' => "invalide date, choose a date in the future"]);
+            return Redirect::route('home')->with(['date' => __('messages.flash_booking_invalid_date')]);
         }
     }
 

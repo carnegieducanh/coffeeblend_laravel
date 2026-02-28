@@ -65,7 +65,20 @@ class LoginController extends Controller
             }
 
             return redirect()->route('product.single', $productId)
-                ->with('success', 'Product added to cart successfully.');
+                ->with('success', __('messages.flash_login_with_cart'));
         }
+
+        return redirect()->route('home')
+            ->with('success', __('messages.flash_login_success', ['name' => $user->name]));
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home')
+            ->with('success', __('messages.flash_logout_success'));
     }
 }

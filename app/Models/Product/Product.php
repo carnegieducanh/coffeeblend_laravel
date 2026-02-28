@@ -13,14 +13,20 @@ class Product extends Model
     protected $table = "products";
 
     protected $fillable = [
-
         "name",
         "image",
         "price",
         "description",
+        "description_ja",
         "type"
-
     ];
 
     public $timestamps = true;
+
+    public function getLocalizedDescriptionAttribute(): string
+    {
+        return app()->getLocale() === 'ja' && $this->description_ja
+            ? $this->description_ja
+            : $this->description;
+    }
 }

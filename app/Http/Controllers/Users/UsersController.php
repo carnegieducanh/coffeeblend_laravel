@@ -48,7 +48,7 @@ class UsersController extends Controller
 
 
         if ($writeReviews) {
-            return Redirect::route('write.reviews')->with(['reviews' => "review submitted successfully"]);
+            return Redirect::route('write.reviews')->with(['reviews' => __('messages.flash_review_submitted')]);
         }
     }
 }

@@ -52,12 +52,6 @@
   </div>
 </section>
 
-<!-- Hiện alert thông báo -->
-<div class="container">
-  @if(Session::has('success'))
-  <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
-  @endif
-</div>
 
 <section class="ftco-section">
   <div class="container">
@@ -74,7 +68,7 @@
         <h3 class="text-white">{{ $product->name }}</h3>
         <p class="price"><span>${{ $product->price }}</span></p>
         <p>
-          {{ $product->description }}
+          {{ $product->localized_description }}
         </p>
         <div class="row mt-4">
           <div class="col-md-6">
@@ -123,7 +117,7 @@
             style="background-image: url({{ str_starts_with($relatedProduct->image, 'http') ? $relatedProduct->image : asset('assets/images/'.$relatedProduct->image) }});"></a>
           <div class="text text-center pt-4">
             <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a></h3>
-            <p class="related-desc">{{ $relatedProduct->description }}</p>
+            <p class="related-desc">{{ $relatedProduct->localized_description }}</p>
             <p class="price"><span>${{ number_format($relatedProduct->price, 2) }}</span></p>
             <p><a href="{{ route('product.single', $relatedProduct->id) }}"
                 class="btn btn-primary btn-outline-primary">{{ __('messages.btn_view_details') }}</a></p>

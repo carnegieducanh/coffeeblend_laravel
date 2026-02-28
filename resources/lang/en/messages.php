@@ -197,4 +197,15 @@ return [
     'label_username'         => 'Name',
     'label_confirm_password' => 'Confirm Password',
     'btn_register'           => 'Register',
+
+    // ── Flash Messages ───────────────────────────────────────────────────────
+    'flash_login_success'       => 'Logged in successfully. Welcome back, :name!',
+    'flash_login_with_cart'     => 'Logged in successfully. Product added to cart.',
+    'flash_logout_success'      => 'You have been logged out successfully.',
+    'flash_cart_added'          => 'Product added to cart successfully.',
+    'flash_cart_deleted'        => 'Product removed from cart.',
+    'flash_booking_success'     => 'Table booked successfully!',
+    'flash_booking_invalid_date'=> 'Invalid date. Please choose a future date.',
+    'flash_login_required'      => 'Please log in to add products to your cart.',
+    'flash_review_submitted'    => 'Review submitted successfully.',
 ];

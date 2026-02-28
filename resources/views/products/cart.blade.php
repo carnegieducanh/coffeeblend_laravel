@@ -19,11 +19,6 @@
   </div>
 </section>
 
-<div class="container">
-  @if(Session::has('delete'))
-  <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('delete') }}</p>
-  @endif
-</div>
 
 <section class="ftco-section ftco-cart">
   <div class="container">
@@ -147,7 +142,7 @@
             style="background-image: url({{ str_starts_with($relatedProduct->image, 'http') ? $relatedProduct->image : asset('assets/images/'.$relatedProduct->image) }});"></a>
           <div class="text text-center pt-4">
             <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a></h3>
-            <p>{{ Str::limit($relatedProduct->description, 60) }}</p>
+            <p>{{ Str::limit($relatedProduct->localized_description, 60) }}</p>
             <p class="price"><span>${{ number_format($relatedProduct->price, 2) }}</span></p>
             <p><a href="{{ route('product.single', $relatedProduct->id) }}" class="btn btn-primary btn-outline-primary">{{ __('messages.btn_view_details') }}</a></p>
           </div>

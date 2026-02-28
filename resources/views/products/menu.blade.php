@@ -82,7 +82,7 @@
                 <span class="price">${{ $dessert->price }}</span>
               </div>
               <div class="d-block">
-                <p>{{ $dessert->description }}</p>
+                <p>{{ $dessert->localized_description }}</p>
               </div>
             </div>
           </a>
@@ -105,7 +105,7 @@
                 <span class="price">${{ $drink->price }}</span>
               </div>
               <div class="d-block">
-                <p>{{ $drink->description }}</p>
+                <p>{{ $drink->localized_description }}</p>
               </div>
             </div>
           </a>
@@ -154,7 +154,7 @@
                         style="background-image: url({{ str_starts_with($drink->image, 'http') ? $drink->image : asset('assets/images/'.$drink->image) }});"></a>
                       <div class="text d-flex flex-column flex-grow-1">
                         <h3><a href="{{ route('product.single', $drink->id) }}">{{ $drink->name }}</a></h3>
-                        <p class="product-description">{{ $drink->description }}</p>
+                        <p class="product-description">{{ $drink->localized_description }}</p>
                         <div class="mt-auto">
                           <p class="price"><span>${{ $drink->price }}</span></p>
                           <p><a href="{{ route('product.single', $drink->id) }}"
@@ -178,7 +178,7 @@
                         style="background-image: url({{ str_starts_with($dessert->image, 'http') ? $dessert->image : asset('assets/images/'.$dessert->image) }});"></a>
                       <div class="text d-flex flex-column flex-grow-1">
                         <h3><a href="{{ route('product.single', $dessert->id) }}">{{ $dessert->name }}</a></h3>
-                        <p class="product-description">{{ $dessert->description }}</p>
+                        <p class="product-description">{{ $dessert->localized_description }}</p>
                         <div class="mt-auto">
                           <p class="price"><span>${{ $dessert->price }}</span></p>
                           <p><a href="{{ route('product.single', $dessert->id) }}"

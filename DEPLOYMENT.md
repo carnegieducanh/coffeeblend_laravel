@@ -525,6 +525,143 @@ php artisan migrate --seed
 
 ---
 
+## 11. Auto-migrate Khi Deploy (Cơ Chế Hoạt Động)
+
+### Migration chạy tự động ở đâu?
+
+File `docker/start.sh` được thực thi mỗi khi container khởi động (mỗi lần deploy):
+
+```bash
+# Trích đoạn docker/start.sh
+echo "[INFO] Running database migrations..."
+php artisan migrate --force 2>&1
+```
+
+Flag `--force` là bắt buộc cho môi trường `production` (Laravel từ chối chạy migrate không có flag này khi `APP_ENV=production`).
+
+**Luồng deploy khi push code lên `main`:**
+
+```
+git push origin main
+       │
+       ▼
+Railway/Render detect thay đổi
+       │
+       ▼
+Build Docker image (Dockerfile)
+       │
+       ▼
+Khởi động container → chạy start.sh
+       │
+       ├─ php artisan migrate --force   ← Schema mới được áp dụng tự động
+       ├─ php artisan config:cache
+       ├─ php artisan route:cache
+       ├─ php artisan view:cache
+       │
+       ▼
+apache2-foreground  ← App online
+```
+
+Không cần can thiệp thủ công sau mỗi lần tạo migration mới.
+
+---
+
+### Seeder dữ liệu khi deploy
+
+Seeder **không chạy tự động** (để tránh xóa data production). Chỉ chạy lần đầu hoặc khi cần.
+
+Có hai cách:
+
+**Cách 1 – Qua Render/Railway Shell:**
+```bash
+php artisan db:seed --class=ProductSeeder
+```
+
+**Cách 2 – Kích hoạt qua env var `SEED_DB`:**
+
+`docker/start.sh` hỗ trợ sẵn biến này:
+```bash
+# Thêm vào Render/Railway env vars tạm thời:
+SEED_DB=true
+# → Deploy → Seeder chạy tự động → Xóa biến này sau khi done
+```
+
+---
+
+### Thêm tính năng mới có migration
+
+Quy trình chuẩn:
+
+```bash
+# 1. Tạo migration local
+php artisan make:migration add_something_to_table
+
+# 2. Viết code migration, kiểm tra local
+php artisan migrate
+
+# 3. Push code
+git add database/migrations/
+git commit -m "Add migration: ..."
+git push origin main
+
+# → Deploy tự động chạy migration trên production DB
+```
+
+---
+
+## 12. Tính Năng Song Ngữ (i18n) Cho Sản Phẩm
+
+### Kiến trúc
+
+| Phần | Cơ chế |
+|------|--------|
+| UI text (nút, tiêu đề, v.v.) | File dịch `resources/lang/{en,ja}/messages.php` |
+| Mô tả sản phẩm | Cột `description` (EN) + `description_ja` (JA) trong DB |
+| Tự động chọn ngôn ngữ | Accessor `getLocalizedDescriptionAttribute()` trên `Product` model |
+
+Accessor trong `app/Models/Product/Product.php`:
+```php
+public function getLocalizedDescriptionAttribute(): string
+{
+    return app()->getLocale() === 'ja' && $this->description_ja
+        ? $this->description_ja
+        : $this->description;
+}
+```
+
+Trong Blade, chỉ cần dùng `$product->localized_description` — tự động trả đúng ngôn ngữ.
+
+---
+
+### Cách thêm sản phẩm mới có mô tả song ngữ
+
+Luôn điền đủ cả hai trường khi tạo sản phẩm:
+
+```php
+Product::create([
+    'name'           => 'Cold Brew',
+    'description'    => 'Smooth, rich cold brew steeped for 12 hours. Low acidity and naturally sweet.',
+    'description_ja' => '12時間かけてじっくり抽出したコールドブリュー。酸味が少なく、自然な甘みが特徴。',
+    'price'          => '6.00',
+    'image'          => 'cold-brew.jpg',
+    'type'           => 'drinks',
+]);
+```
+
+---
+
+### Cập nhật description_ja cho sản phẩm đã có trên production
+
+**Sau lần push này**, migration `2026_02_28_000003_seed_product_description_ja.php` sẽ tự động điền `description_ja` cho toàn bộ sản phẩm hiện có trên Railway DB (chỉ update những row đang có `description_ja = NULL`).
+
+Nếu cần update thủ công qua Shell:
+```bash
+php artisan tinker
+>>> \App\Models\Product\Product::where('name', 'Tên SP')->update(['description_ja' => '日本語...']);
+```
+
+---
+
 ## Tóm Tắt Nhanh (Checklist)
 
 - [ ] Push code (bao gồm `Dockerfile`, `.dockerignore`, `docker/start.sh`) lên GitHub
