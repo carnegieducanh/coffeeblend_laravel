@@ -13,8 +13,7 @@ class Booking extends Model
     protected $table = "bookings";
 
     protected $fillable = [
-        "first_name",
-        "last_name",
+        "name",
         "date",
         "time",
         "phone",

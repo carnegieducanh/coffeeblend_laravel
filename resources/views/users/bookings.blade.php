@@ -29,8 +29,7 @@
           <table class="table-dark" style="width: 1100px">
             <thead style="background-color: #c49b63; height: 60px">
               <tr class="text-center">
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Phone</th>
@@ -43,10 +42,7 @@
               @if($bookings->count() > 0)
               @foreach ($bookings as $booking)
               <tr class="text-center" style="height: 140px">
-                <td class="product-remove">{{ $booking->first_name }}</td>
-
-                <td class="image-prod">{{ $booking->last_name }}</td>
-
+                <td class="product-remove">{{ $booking->name }}</td>
 
                 <td class="price">{{ $booking->date }}</td>
 

@@ -9,15 +9,8 @@
           @csrf
           <div class="d-md-flex">
             <div class="form-group">
-              <input type="text" name="first_name" class="form-control" placeholder="First Name">
-              @error('first_name')
-              <span class="booking-field-error">{{ $message }}</span>
-              @enderror
-            </div>
-
-            <div class="form-group ml-md-4">
-              <input type="text" name="last_name" class="form-control" placeholder="Last Name">
-              @error('last_name')
+              <input type="text" name="name" class="form-control" placeholder="Name">
+              @error('name')
               <span class="booking-field-error">{{ $message }}</span>
               @enderror
             </div>
@@ -60,10 +53,25 @@
               @enderror
             </div>
             <div class="form-group ml-md-4">
-              <input type="submit" name="submit" value="Book" class="btn btn-white py-3 px-4">
+              <input type="submit" name="submit" value="Book" class="btn book-btn py-3 px-4">
             </div>
           </div>
         </form>
+        <style>
+        .book-btn {
+          background: #000 !important;
+          color: #fff !important;
+          border: 1px solid #000 !important;
+          transition: background 0.2s, color 0.2s;
+        }
+
+        .book-btn:hover {
+          background: whitesmoke !important;
+          /* Màu xám Bootstrap */
+          color: black !important;
+          border-color: #6c757d !important;
+        }
+        </style>
       </div>
     </div>
   </div>

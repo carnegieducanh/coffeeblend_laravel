@@ -30,14 +30,8 @@
           <div class="row align-items-end">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="firstname">Firt Name</label>
-                <input type="text" name="first_name" class="form-control" placeholder="">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="lastname">Last Name</label>
-                <input type="text" name="last_name" class="form-control" placeholder="">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control" placeholder="">
               </div>
             </div>
             <div class="w-100"></div>

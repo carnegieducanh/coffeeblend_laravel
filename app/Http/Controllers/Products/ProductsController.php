@@ -146,8 +146,7 @@ class ProductsController extends Controller
 
 
         Request()->validate([
-            "first_name" => "required|max:40",
-            "last_name" => "required|max:40",
+            "name" => "required|max:40",
             "date" => "required",
             "time" => "required",
             "phone" => "required|max:40",

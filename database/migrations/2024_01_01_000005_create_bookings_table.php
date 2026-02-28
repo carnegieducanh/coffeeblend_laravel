@@ -10,8 +10,7 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name', 200);
-            $table->string('last_name', 200);
+            $table->string('name', 200);
             $table->string('date', 200);
             $table->string('time', 200);
             $table->string('phone', 30);

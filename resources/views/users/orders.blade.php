@@ -29,8 +29,7 @@
           <table class="table-dark" style="width: 1100px">
             <thead style="background-color: #c49b63; height: 60px">
               <tr class="text-center">
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>City</th>
                 <th>Email</th>
                 <th>Price</th>
@@ -43,10 +42,7 @@
               @if($orders->count() > 0)
               @foreach ($orders as $order)
               <tr class="text-center" style="height: 140px">
-                <td class="product-remove">{{ $order->first_name }}</td>
-
-                <td class="image-prod">{{ $order->last_name }}</td>
-
+                <td class="product-remove">{{ $order->name }}</td>
 
                 <td class="price">{{ $order->city }}</td>
 
