@@ -207,6 +207,8 @@
       </div>
     </nav>
 
+    @yield('page-notice')
+
     <!-- Flash Alerts -->
     <div id="flash-alerts-container">
       @include('layouts._flash_alerts')

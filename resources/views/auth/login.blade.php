@@ -1,17 +1,29 @@
 @extends('layouts.app')
 
+@if(request()->query('from') === 'order')
+@section('page-notice')
+<div class="w-100 py-2 text-center"
+  style="background:#513e00; border-bottom:1px solid #ab8104; position:relative; z-index:1040;">
+  <i class="icon-coffee mr-2" style="color:#bbbaba;"></i>{{ __('messages.flash_login_to_order') }}
+</div>
+@endsection
+@endif
+
 @section('content')
 
 <section class="home-slider owl-carousel">
 
-  <div class="slider-item" style="background-image: url({{ asset('assets/images/bg_1.jpg') }}); margin-top: -40px; position: relative;">
+  <div class="slider-item"
+    style="background-image: url({{ asset('assets/images/bg_1.jpg') }}); margin-top: -40px; position: relative;">
     <div class="overlay"></div>
     <div class="container">
       <div class="row slider-text justify-content-center align-items-center">
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
           <h1 class="mb-3 mt-5 bread">{{ __('messages.login') }}</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.login') }}</span></p>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span>
+            <span>{{ __('messages.login') }}</span>
+          </p>
         </div>
 
       </div>
@@ -23,7 +35,7 @@
 
 <section class="ftco-section">
   <div class="container">
-<div class="row">
+    <div class="row">
       <div class="col-md-12 ftco-animate">
         <form method="POST" action="{{ route('login') }}" class="billing-form ftco-bg-dark p-3 p-md-5">
           @csrf
@@ -60,7 +72,8 @@
             <div class="col-md-12">
               <div class="form-group mt-4">
                 <div class="radio">
-                  <button name="submit" type="submit" class="btn btn-primary py-3 px-4">{{ __('messages.btn_login') }}</button>
+                  <button name="submit" type="submit"
+                    class="btn btn-primary py-3 px-4">{{ __('messages.btn_login') }}</button>
                 </div>
               </div>
             </div>

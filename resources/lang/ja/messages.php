@@ -207,5 +207,6 @@ return [
     'flash_booking_success'     => 'テーブルの予約が完了しました！',
     'flash_booking_invalid_date'=> '無効な日付です。将来の日付を選択してください。',
     'flash_login_required'      => 'カートに追加するにはログインが必要です。',
+    'flash_login_to_order'      => 'ご注文機能を利用するにはログインが必要です。',
     'flash_review_submitted'    => 'レビューを送信しました。',
 ];

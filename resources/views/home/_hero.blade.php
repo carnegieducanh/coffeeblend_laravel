@@ -8,7 +8,7 @@
           <span class="subheading">{{ __('messages.hero_slide1_sub') }}</span>
           <h1 class="mb-4">{{ __('messages.hero_slide1_title') }}</h1>
           <p class="mb-4 mb-md-5">{{ __('messages.hero_slide1_desc') }}</p>
-          <p><a href="{{ Auth::check() ? route('users.orders') : route('login') }}"
+          <p><a href="{{ Auth::check() ? route('users.orders') : route('login', ['from' => 'order']) }}"
               class="btn btn-primary p-3 px-xl-4 py-xl-3">{{ __('messages.btn_order_now') }}</a> <a href="{{ route('products.menu') }}"
               class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">{{ __('messages.btn_view_menu') }}</a></p>
         </div>
@@ -26,7 +26,7 @@
           <span class="subheading">{{ __('messages.hero_slide2_sub') }}</span>
           <h1 class="mb-4">{!! __('messages.hero_slide2_title') !!}</h1>
           <p class="mb-4 mb-md-5">{{ __('messages.hero_slide2_desc') }}</p>
-          <p><a href="{{ Auth::check() ? route('users.orders') : route('login') }}"
+          <p><a href="{{ Auth::check() ? route('users.orders') : route('login', ['from' => 'order']) }}"
               class="btn btn-primary p-3 px-xl-4 py-xl-3">{{ __('messages.btn_order_now') }}</a> <a href="{{ route('products.menu') }}"
               class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">{{ __('messages.btn_view_menu') }}</a></p>
         </div>
@@ -44,7 +44,7 @@
           <span class="subheading">{{ __('messages.hero_slide3_sub') }}</span>
           <h1 class="mb-4">{{ __('messages.hero_slide3_title') }}</h1>
           <p class="mb-4 mb-md-5">{{ __('messages.hero_slide3_desc') }}</p>
-          <p><a href="{{ Auth::check() ? route('users.orders') : route('login') }}"
+          <p><a href="{{ Auth::check() ? route('users.orders') : route('login', ['from' => 'order']) }}"
               class="btn btn-primary p-3 px-xl-4 py-xl-3">{{ __('messages.btn_order_now') }}</a> <a href="{{ route('products.menu') }}"
               class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">{{ __('messages.btn_view_menu') }}</a></p>
         </div>

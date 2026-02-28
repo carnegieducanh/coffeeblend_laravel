@@ -207,5 +207,6 @@ return [
     'flash_booking_success'     => 'Table booked successfully!',
     'flash_booking_invalid_date'=> 'Invalid date. Please choose a future date.',
     'flash_login_required'      => 'Please log in to add products to your cart.',
+    'flash_login_to_order'      => 'You need to login to use the order feature.',
     'flash_review_submitted'    => 'Review submitted successfully.',
 ];
