@@ -29,7 +29,7 @@ class HomeController extends Controller
         $products = Product::select()->orderBy('id', 'desc')->take('4')->get();
         $reviews = Review::select()->orderBy('id', 'desc')->take('4')->get();
 
-        return view('home', compact('products', 'reviews'));
+        return view('home.index', compact('products', 'reviews'));
     }
 
     public function services()

@@ -10,8 +10,8 @@
       <div class="row slider-text justify-content-center align-items-center">
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
-          <h1 class="mb-3 mt-5 bread">Login</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Login</span></p>
+          <h1 class="mb-3 mt-5 bread">{{ __('messages.login') }}</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.login') }}</span></p>
         </div>
 
       </div>
@@ -32,11 +32,11 @@
       <div class="col-md-12 ftco-animate">
         <form method="POST" action="{{ route('login') }}" class="billing-form ftco-bg-dark p-3 p-md-5">
           @csrf
-          <h3 class="mb-4 billing-heading">Login</h3>
+          <h3 class="mb-4 billing-heading">{{ __('messages.login') }}</h3>
           <div class="row align-items-end">
             <div class="col-md-12">
               <div class="form-group">
-                <label for="Email">Email</label>
+                <label for="Email">{{ __('messages.label_email_field') }}</label>
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                   value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -50,7 +50,7 @@
 
             <div class="col-md-12">
               <div class="form-group">
-                <label for="Password">Password</label>
+                <label for="Password">{{ __('messages.label_password') }}</label>
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                   name="password" required autocomplete="current-password">
 
@@ -65,7 +65,7 @@
             <div class="col-md-12">
               <div class="form-group mt-4">
                 <div class="radio">
-                  <button name="submit" type="submit" class="btn btn-primary py-3 px-4">Login</button>
+                  <button name="submit" type="submit" class="btn btn-primary py-3 px-4">{{ __('messages.btn_login') }}</button>
                 </div>
               </div>
             </div>

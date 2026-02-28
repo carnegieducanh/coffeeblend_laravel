@@ -4,7 +4,7 @@
       @include('partials._info_bar')
 
       <div class="book p-4">
-        <h3>Book a Table</h3>
+        <h3>{{ __('messages.book_a_table') }}</h3>
         <form action="{{ route('booking.tables') }}" method="POST" class="appointment-form">
           @csrf
           <div class="d-md-flex">
@@ -12,7 +12,7 @@
               @auth
               <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" readonly>
               @else
-              <input type="text" name="name" class="form-control" placeholder="Name">
+              <input type="text" name="name" class="form-control" placeholder="{{ __('messages.placeholder_name') }}">
               @endauth
               @error('name')
               <span class="booking-field-error">{{ $message }}</span>
@@ -23,7 +23,7 @@
             <div class="form-group">
               <div class="input-wrap">
                 <div class="icon"><span class="ion-md-calendar"></span></div>
-                <input type="text" name="date" class="form-control appointment_date" placeholder="Date">
+                <input type="text" name="date" class="form-control appointment_date" placeholder="{{ __('messages.placeholder_date') }}">
               </div>
               @error('date')
               <span class="booking-field-error">{{ $message }}</span>
@@ -32,7 +32,7 @@
             <div class="form-group ml-md-4">
               <div class="input-wrap">
                 <div class="icon"><span class="ion-ios-clock"></span></div>
-                <input type="text" name="time" class="form-control appointment_time" placeholder="Time">
+                <input type="text" name="time" class="form-control appointment_time" placeholder="{{ __('messages.placeholder_time') }}">
               </div>
               @error('time')
               <span class="booking-field-error">{{ $message }}</span>
@@ -43,7 +43,7 @@
               @endif
             </div>
             <div class="form-group ml-md-4">
-              <input name="phone" type="text" class="form-control" placeholder="Phone">
+              <input name="phone" type="text" class="form-control" placeholder="{{ __('messages.placeholder_phone') }}">
               @error('phone')
               <span class="booking-field-error">{{ $message }}</span>
               @enderror
@@ -51,13 +51,13 @@
           </div>
           <div class="d-md-flex">
             <div class="form-group">
-              <textarea name="message" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+              <textarea name="message" cols="30" rows="2" class="form-control" placeholder="{{ __('messages.placeholder_message') }}"></textarea>
               @error('message')
               <span class="booking-field-error">{{ $message }}</span>
               @enderror
             </div>
             <div class="form-group ml-md-4">
-              <input type="submit" name="submit" value="Book" class="btn book-btn py-3 px-4">
+              <input type="submit" name="submit" value="{{ __('messages.btn_book') }}" class="btn book-btn py-3 px-4">
             </div>
           </div>
         </form>

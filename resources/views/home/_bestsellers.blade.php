@@ -2,10 +2,9 @@
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate text-center">
-        <span class="subheading">Discover</span>
-        <h2 class="mb-4">Best Coffee Sellers</h2>
-        <p>These are the drinks our Tokyo regulars keep coming back for. Handcrafted by our baristas and loved by the
-          community — taste the difference for yourself.</p>
+        <span class="subheading">{{ __('messages.discover') }}</span>
+        <h2 class="mb-4">{{ __('messages.best_sellers') }}</h2>
+        <p>{{ __('messages.bestsellers_desc') }}</p>
       </div>
     </div>
     <div class="row">
@@ -20,8 +19,7 @@
             <p class="product-description">{{ $product->description }}</p>
             <div class="mt-auto">
               <p class="price"><span>${{ $product->price }}</span></p>
-              <p><a href="{{ route('product.single', $product->id) }}" class="btn btn-primary btn-outline-primary">View
-                  Details</a></p>
+              <p><a href="{{ route('product.single', $product->id) }}" class="btn btn-primary btn-outline-primary">{{ __('messages.btn_view_details') }}</a></p>
             </div>
           </div>
         </div>

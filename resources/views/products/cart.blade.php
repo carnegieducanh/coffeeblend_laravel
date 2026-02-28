@@ -10,8 +10,8 @@
       <div class="row slider-text justify-content-center align-items-center">
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
-          <h1 class="mb-3 mt-5 bread">Cart</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Cart</span></p>
+          <h1 class="mb-3 mt-5 bread">{{ __('messages.cart_page') }}</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.cart_page') }}</span></p>
         </div>
 
       </div>
@@ -43,10 +43,10 @@
               <tr class="text-center">
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th>{{ __('messages.col_product') }}</th>
+                <th>{{ __('messages.col_price') }}</th>
+                <th>{{ __('messages.col_quantity') }}</th>
+                <th>{{ __('messages.col_total') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -86,7 +86,7 @@
               @endforeach
 
               @else
-              <p class="alert alert-success">you have no products in cart just yet</p>
+              <p class="alert alert-success">{{ __('messages.empty_cart') }}</p>
               @endif
 
 
@@ -98,18 +98,18 @@
     <div class="row justify-content-end">
       <div class="col col-lg-3 col-md-6 mt-5 cart-wrap ftco-animate">
         <div class="cart-total mb-3">
-          <h3>Cart Totals</h3>
+          <h3>{{ __('messages.cart_totals') }}</h3>
           <p class="d-flex">
-            <span>Subtotal</span>
+            <span>{{ __('messages.subtotal') }}</span>
             <span id="cart-subtotal">${{ number_format($totalPrice, 2) }}</span>
           </p>
           <p class="d-flex">
-            <span>Delivery</span>
+            <span>{{ __('messages.delivery') }}</span>
             <span>$0.00</span>
           </p>
           <hr>
           <p class="d-flex total-price">
-            <span>Total</span>
+            <span>{{ __('messages.total') }}</span>
             <span id="cart-total">${{ number_format($totalPrice, 2) }}</span>
           </p>
         </div>
@@ -117,12 +117,12 @@
         <form method="POST" action="{{ route('prepare.checkout') }}">
           @csrf
           <input name="price" type="hidden" value="{{ $totalPrice }}" id="checkout-price">
-          <input type="submit" value="Proceed to Checkout" name="submit" class="btn btn-primary py-3 px-4">
+          <input type="submit" value="{{ __('messages.btn_proceed_checkout') }}" name="submit" class="btn btn-primary py-3 px-4">
 
         </form>
         @else
 
-        <p class="text-center alert alert-success">you cannot checkout because you have no items in cart</p>
+        <p class="text-center alert alert-success">{{ __('messages.cannot_checkout') }}</p>
         @endif
       </div>
     </div>
@@ -134,9 +134,9 @@
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate text-center">
-        <span class="subheading">Discover</span>
-        <h2 class="mb-4">You might also like</h2>
-        <p>Explore more from our menu — handpicked just for you.</p>
+        <span class="subheading">{{ __('messages.discover') }}</span>
+        <h2 class="mb-4">{{ __('messages.you_might_also_like') }}</h2>
+        <p>{{ __('messages.handpicked_for_you') }}</p>
       </div>
     </div>
     <div class="row">
@@ -149,7 +149,7 @@
             <h3><a href="{{ route('product.single', $relatedProduct->id) }}">{{ $relatedProduct->name }}</a></h3>
             <p>{{ Str::limit($relatedProduct->description, 60) }}</p>
             <p class="price"><span>${{ number_format($relatedProduct->price, 2) }}</span></p>
-            <p><a href="{{ route('product.single', $relatedProduct->id) }}" class="btn btn-primary btn-outline-primary">View</a></p>
+            <p><a href="{{ route('product.single', $relatedProduct->id) }}" class="btn btn-primary btn-outline-primary">{{ __('messages.btn_view_details') }}</a></p>
           </div>
         </div>
       </div>

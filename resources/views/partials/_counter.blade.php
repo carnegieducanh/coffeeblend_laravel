@@ -10,7 +10,7 @@
               <div class="text">
                 <div class="icon"><span class="flaticon-coffee-cup"></span></div>
                 <strong class="number" data-number="50">0</strong>
-                <span>Coffee Blends</span>
+                <span>{{ __('messages.coffee_blends') }}</span>
               </div>
             </div>
           </div>
@@ -19,7 +19,7 @@
               <div class="text">
                 <div class="icon"><span class="flaticon-coffee-cup"></span></div>
                 <strong class="number" data-number="12">0</strong>
-                <span>Awards Won</span>
+                <span>{{ __('messages.awards_won') }}</span>
               </div>
             </div>
           </div>
@@ -28,7 +28,7 @@
               <div class="text">
                 <div class="icon"><span class="flaticon-coffee-cup"></span></div>
                 <strong class="number" data-number="8500">0</strong>
-                <span>Happy Customers</span>
+                <span>{{ __('messages.happy_customers') }}</span>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
               <div class="text">
                 <div class="icon"><span class="flaticon-coffee-cup"></span></div>
                 <strong class="number" data-number="18">0</strong>
-                <span>Expert Baristas</span>
+                <span>{{ __('messages.expert_baristas') }}</span>
               </div>
             </div>
           </div>

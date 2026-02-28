@@ -10,9 +10,8 @@
       <div class="row slider-text justify-content-center align-items-center">
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
-          <h1 class="mb-3 mt-5 bread">My Bookings</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>My
-              Bookings</span></p>
+          <h1 class="mb-3 mt-5 bread">{{ __('messages.my_bookings') }}</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.my_bookings') }}</span></p>
         </div>
 
       </div>
@@ -29,12 +28,12 @@
           <table class="table-dark" style="width: 1100px">
             <thead style="background-color: #c49b63; height: 60px">
               <tr class="text-center">
-                <th>Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Phone</th>
-                <th>Status</th>
-                <th>Wrtie review</th>
+                <th>{{ __('messages.col_name') }}</th>
+                <th>{{ __('messages.col_date') }}</th>
+                <th>{{ __('messages.col_time') }}</th>
+                <th>{{ __('messages.col_phone_header') }}</th>
+                <th>{{ __('messages.col_status') }}</th>
+                <th>{{ __('messages.btn_write_review') }}</th>
 
               </tr>
             </thead>
@@ -54,16 +53,16 @@
                 <td class="total">{{ $booking->status }}</td>
                 <td class="total">
                   @if($booking->status == "Booked")
-                  <a class="btn btn-primary" href="{{ route('write.reviews') }}">Write review</a>
+                  <a class="btn btn-primary" href="{{ route('write.reviews') }}">{{ __('messages.btn_write_review') }}</a>
                   @else
-                  <p>not avaibale just yey</p>
+                  <p>{{ __('messages.not_available_yet') }}</p>
                   @endif
                 </td>
               </tr><!-- END TR-->
               @endforeach
               @else
 
-              <p class="alert alert-success">you have no bookings just yet</p>
+              <p class="alert alert-success">{{ __('messages.no_bookings') }}</p>
               @endif
 
 

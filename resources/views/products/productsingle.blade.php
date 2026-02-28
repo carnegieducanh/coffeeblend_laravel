@@ -43,9 +43,8 @@
       <div class="row slider-text justify-content-center align-items-center">
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
-          <h1 class="mb-3 mt-5 bread">Product Detail</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Product
-              Detail</span></p>
+          <h1 class="mb-3 mt-5 bread">{{ __('messages.product_detail') }}</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.product_detail') }}</span></p>
         </div>
 
       </div>
@@ -93,9 +92,9 @@
           <input type="hidden" name="price" value="{{ $product->price }}">
           <input type="hidden" name="image" value="{{ $product->image }}">
           @if(Auth::check() && $checkingInCart > 0)
-          <a style="background-color: #555;" class="text-white btn py-3 px-5" disabled>Already in Cart</a>
+          <a style="background-color: #555;" class="text-white btn py-3 px-5" disabled>{{ __('messages.btn_already_in_cart') }}</a>
           @else
-          <button type="submit" name="submit" class="btn btn-primary btn-outline-primary py-3 px-5">Add to Cart</button>
+          <button type="submit" name="submit" class="btn btn-primary btn-outline-primary py-3 px-5">{{ __('messages.btn_add_to_cart_form') }}</button>
           @endif
         </form>
       </div>
@@ -111,9 +110,9 @@
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate text-center">
-        <span class="subheading">Discover</span>
-        <h2 class="mb-4">Related Products</h2>
-        <p>More from the same category — you might love these too.</p>
+        <span class="subheading">{{ __('messages.discover') }}</span>
+        <h2 class="mb-4">{{ __('messages.related_products') }}</h2>
+        <p>{{ __('messages.related_products_desc') }}</p>
       </div>
     </div>
     <div class="row">
@@ -127,7 +126,7 @@
             <p class="related-desc">{{ $relatedProduct->description }}</p>
             <p class="price"><span>${{ number_format($relatedProduct->price, 2) }}</span></p>
             <p><a href="{{ route('product.single', $relatedProduct->id) }}"
-                class="btn btn-primary btn-outline-primary">View Details</a></p>
+                class="btn btn-primary btn-outline-primary">{{ __('messages.btn_view_details') }}</a></p>
           </div>
         </div>
       </div>

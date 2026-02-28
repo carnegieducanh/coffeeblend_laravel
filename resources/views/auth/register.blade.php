@@ -11,10 +11,10 @@
       <div class="row slider-text justify-content-center align-items-center">
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
-          <h1 class="mb-3 mt-5 bread">Register</h1>
+          <h1 class="mb-3 mt-5 bread">{{ __('messages.register') }}</h1>
           <p class="breadcrumbs">
-            <span class="mr-2"><a href="{{ route('home') }}">Home</a></span>
-            <span>Register</span>
+            <span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span>
+            <span>{{ __('messages.register') }}</span>
           </p>
         </div>
 
@@ -30,11 +30,11 @@
       <div class="col-md-12 ftco-animate">
         <form method="POST" action="{{ route('register') }}" class="billing-form ftco-bg-dark p-3 p-md-5">
           @csrf
-          <h3 class="mb-4 billing-heading">Register</h3>
+          <h3 class="mb-4 billing-heading">{{ __('messages.register') }}</h3>
           <div class="row align-items-end">
             <div class="col-md-12">
               <div class="form-group">
-                <label for="Username">Name</label>
+                <label for="Username">{{ __('messages.label_username') }}</label>
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                   value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-12">
               <div class="form-group">
-                <label for="Email">Email</label>
+                <label for="Email">{{ __('messages.label_email_field') }}</label>
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                   value="{{ old('email') }}" required autocomplete="email">
 
@@ -61,7 +61,7 @@
 
             <div class="col-md-12">
               <div class="form-group">
-                <label for="Password">Password</label>
+                <label for="Password">{{ __('messages.label_password') }}</label>
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                   name="password" required autocomplete="new-password">
 
@@ -76,7 +76,7 @@
 
             <div class="col-md-12">
               <div class="form-group">
-                <label for="Password">Confirm Password</label>
+                <label for="Password">{{ __('messages.label_confirm_password') }}</label>
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required
                   autocomplete="new-password">
               </div>
@@ -85,7 +85,7 @@
             <div class="col-md-12">
               <div class="form-group mt-4">
                 <div class="radio">
-                  <button type="submit" name="submit" class="btn btn-primary py-3 px-4">Register</button>
+                  <button type="submit" name="submit" class="btn btn-primary py-3 px-4">{{ __('messages.btn_register') }}</button>
                 </div>
               </div>
             </div>

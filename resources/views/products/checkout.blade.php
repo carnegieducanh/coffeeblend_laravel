@@ -9,8 +9,8 @@
       <div class="row slider-text justify-content-center align-items-center">
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
-          <h1 class="mb-3 mt-5 bread">Checkout</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Checout</span>
+          <h1 class="mb-3 mt-5 bread">{{ __('messages.checkout_page') }}</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.checkout_page') }}</span>
           </p>
         </div>
 
@@ -25,19 +25,19 @@
     <div class="row">
       <div class="col-md-12 ftco-animate">
         <form method="POST" action="{{ route('proccess.checkout') }}" class="billing-form ftco-bg-dark p-3 p-md-5">
-          <h3 class="mb-4 billing-heading">Billing Details</h3>
+          <h3 class="mb-4 billing-heading">{{ __('messages.billing_details') }}</h3>
           @csrf
           <div class="row align-items-end">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">{{ __('messages.label_name') }}</label>
                 <input type="text" name="name" class="form-control" placeholder="">
               </div>
             </div>
             <div class="w-100"></div>
             <div class="col-md-12">
               <div class="form-group">
-                <label for="country">State / Country</label>
+                <label for="country">{{ __('messages.label_state_country') }}</label>
                 <div class="select-wrap">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                   <select name="state" id="" class="form-control">
@@ -54,9 +54,9 @@
             <div class="w-100"></div>
             <div class="col-md-12">
               <div class="form-group">
-                <label for="streetaddress">Street Address</label>
+                <label for="streetaddress">{{ __('messages.label_street_address') }}</label>
                 <textarea name="address" cols="10" rows="10" class="form-control"
-                  placeholder="House number and street name"></textarea>
+                  placeholder="{{ __('messages.placeholder_house_number') }}"></textarea>
               </div>
             </div>
             {{-- <div class="col-md-12">
@@ -67,26 +67,26 @@
             <div class="w-100"></div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="towncity">Town / City</label>
+                <label for="towncity">{{ __('messages.label_town_city') }}</label>
                 <input name="city" type="text" class="form-control" placeholder="">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="postcodezip">Postcode / ZIP *</label>
+                <label for="postcodezip">{{ __('messages.label_postcode_zip') }}</label>
                 <input name="zip_code" type="text" class="form-control" placeholder="">
               </div>
             </div>
             <div class="w-100"></div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="phone">Phone</label>
+                <label for="phone">{{ __('messages.label_phone_field') }}</label>
                 <input name="phone" type="text" class="form-control" placeholder="">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="emailaddress">Email Address</label>
+                <label for="emailaddress">{{ __('messages.label_email_address') }}</label>
                 <input name="email" type="text" class="form-control" placeholder="">
               </div>
             </div>
@@ -108,7 +108,7 @@
             <div class="col-md-12">
               <div class="form-group mt-4">
                 <div class="radio">
-                  <button type="submit" name="submit" class="btn btn-primary py-3 px-4">Place an order</button>
+                  <button type="submit" name="submit" class="btn btn-primary py-3 px-4">{{ __('messages.btn_place_order') }}</button>
 
                 </div>
               </div>

@@ -7,8 +7,8 @@
             <span class="flaticon-choices"></span>
           </div>
           <div class="media-body">
-            <h3 class="heading">Easy to Order</h3>
-            <p>Browse our menu and place your order online in just a few clicks — quick, simple, and always ready when you are.</p>
+            <h3 class="heading">{{ __('messages.service1_title') }}</h3>
+            <p>{{ __('messages.service1_desc') }}</p>
           </div>
         </div>
       </div>
@@ -18,8 +18,8 @@
             <span class="flaticon-delivery-truck"></span>
           </div>
           <div class="media-body">
-            <h3 class="heading">Fast Tokyo Delivery</h3>
-            <p>Get your favorite coffee delivered fresh to your door across Tokyo. We partner with local couriers to ensure every cup arrives hot and on time.</p>
+            <h3 class="heading">{{ __('messages.service2_title') }}</h3>
+            <p>{{ __('messages.service2_desc') }}</p>
           </div>
         </div>
       </div>
@@ -29,8 +29,8 @@
             <span class="flaticon-coffee-bean"></span>
           </div>
           <div class="media-body">
-            <h3 class="heading">Premium Quality Beans</h3>
-            <p>We source single-origin beans from the world's finest farms and roast them in-house daily to guarantee exceptional flavor in every cup.</p>
+            <h3 class="heading">{{ __('messages.service3_title') }}</h3>
+            <p>{{ __('messages.service3_desc') }}</p>
           </div>
         </div>
       </div>

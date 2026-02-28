@@ -44,9 +44,9 @@
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 heading-section text-center ftco-animate">
-        <span class="subheading">Testimony</span>
-        <h2 class="mb-4">What Our Guests Say</h2>
-        <p>Don't just take our word for it — hear from the coffee lovers who visit us every day at our Shibuya café.</p>
+        <span class="subheading">{{ __('messages.testimony') }}</span>
+        <h2 class="mb-4">{{ __('messages.what_guests_say') }}</h2>
+        <p>{{ __('messages.testimony_desc') }}</p>
       </div>
     </div>
   </div>

@@ -9,8 +9,8 @@
       <div class="row slider-text justify-content-center align-items-center">
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
-          <h1 class="mb-3 mt-5 bread">Our Menu</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Menu</span></p>
+          <h1 class="mb-3 mt-5 bread">{{ __('messages.our_menu_page') }}</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.menu_breadcrumb') }}</span></p>
         </div>
 
       </div>
@@ -68,7 +68,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h3 class="mb-5 heading-pricing">Desserts</h3>
+        <h3 class="mb-5 heading-pricing">{{ __('messages.desserts') }}</h3>
         <div style="max-height: 440px; overflow-y: auto; padding-right: 8px;">
           @foreach ($desserts as $dessert)
           <a href="{{ route('product.single', $dessert->id) }}" class="pricing-entry d-flex ftco-animate"
@@ -91,7 +91,7 @@
       </div>
 
       <div class="col-md-6">
-        <h3 class="mb-5 heading-pricing">Drinks</h3>
+        <h3 class="mb-5 heading-pricing">{{ __('messages.drinks') }}</h3>
         <div style="max-height: 440px; overflow-y: auto; padding-right: 8px;">
           @foreach ($drinks as $drink)
           <a href="{{ route('product.single', $drink->id) }}" class="pricing-entry d-flex ftco-animate"
@@ -120,11 +120,9 @@
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 heading-section text-center ftco-animate">
-        <span class="subheading">Discover</span>
-        <h2 class="mb-4">Our Products</h2>
-        <p>Explore our full range of handcrafted drinks and freshly made desserts. From bold espresso to light
-          Japanese-inspired pastries — every item on our menu is crafted with care by our expert baristas and kitchen
-          team in Shibuya.</p>
+        <span class="subheading">{{ __('messages.discover') }}</span>
+        <h2 class="mb-4">{{ __('messages.our_products') }}</h2>
+        <p>{{ __('messages.products_desc') }}</p>
       </div>
     </div>
     <div class="row d-md-flex">
@@ -135,10 +133,10 @@
               aria-orientation="vertical">
 
               <a class="nav-link active" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab"
-                aria-controls="v-pills-2" aria-selected="false">Drinks</a>
+                aria-controls="v-pills-2" aria-selected="false">{{ __('messages.drinks') }}</a>
 
               <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab"
-                aria-controls="v-pills-3" aria-selected="false">Desserts</a>
+                aria-controls="v-pills-3" aria-selected="false">{{ __('messages.desserts') }}</a>
             </div>
           </div>
           <div class="col-md-12 d-flex align-items-center">
@@ -160,7 +158,7 @@
                         <div class="mt-auto">
                           <p class="price"><span>${{ $drink->price }}</span></p>
                           <p><a href="{{ route('product.single', $drink->id) }}"
-                              class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                              class="btn btn-primary btn-outline-primary">{{ __('messages.btn_add_to_cart') }}</a></p>
                         </div>
                       </div>
                     </div>
@@ -184,7 +182,7 @@
                         <div class="mt-auto">
                           <p class="price"><span>${{ $dessert->price }}</span></p>
                           <p><a href="{{ route('product.single', $dessert->id) }}"
-                              class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                              class="btn btn-primary btn-outline-primary">{{ __('messages.btn_add_to_cart') }}</a></p>
                         </div>
                       </div>
                     </div>

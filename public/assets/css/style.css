@@ -11328,6 +11328,7 @@ textarea.form-control {
     font-weight: 700;
     position: relative;
     text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.15);
 }
 @media (max-width: 767.98px) {
     .heading-section h2 {
@@ -12242,4 +12243,41 @@ textarea.form-control {
     -webkit-box-orient: vertical;
     overflow: hidden;
     flex: 1;
+}
+
+/* ===== MOBILE COLOR FIX =====
+   Body text color for dark theme — Bootstrap 4 default (#212529) is dark on
+   dark body (#151111). Override so inherited text is legible across all sections
+   and screen sizes. Explicit overrides (services amber, form controls, etc.)
+   still take precedence via their own color rules.
+*/
+body {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* About section: on desktop the .overlap has rgba(0,0,0,0.5) dark bg;
+   on mobile there is no overlay background — provide one so text stays visible */
+@media (max-width: 767.98px) {
+    .ftco-about .one-half:not(.img) {
+        background: rgba(0, 0, 0, 0.55);
+        padding: 30px 20px;
+    }
+}
+
+/* Heading section h2 inherits body color (now white) — keep services dark */
+.ftco-services .heading-section h2,
+.ftco-services .services h3,
+.ftco-services .services .media-body,
+.ftco-services p {
+    color: #1d150b;
+}
+
+/* Ensure nav-links in collapsed mobile menu remain white on black navbar */
+@media (max-width: 991.98px) {
+    .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    .ftco-navbar-light .navbar-nav > .nav-item.active > a {
+        color: #c49b63;
+    }
 }

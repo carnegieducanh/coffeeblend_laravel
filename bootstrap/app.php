@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // so Laravel correctly detects HTTPS and generates correct asset URLs
         $middleware->trustProxies(at: '*');
 
+        // Apply locale from session on every web request
+        $middleware->appendToGroup('web', \App\Http\Middleware\SetLocale::class);
+
         // Custom aliases
         $middleware->alias([
             'check.for.price' => \App\Http\Middleware\CheckForPrice::class,

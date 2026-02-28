@@ -9,8 +9,8 @@
         <div class="row slider-text justify-content-center align-items-center">
 
           <div class="col-md-7 col-sm-12 text-center ftco-animate">
-              <h1 class="mb-3 mt-5 bread">Success, you paid for the Products</h1>
-              <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Success, you paid for the Products</span></p>
+              <h1 class="mb-3 mt-5 bread">{{ __('messages.success_paid') }}</h1>
+              <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">{{ __('messages.home') }}</a></span> <span>{{ __('messages.success_paid') }}</span></p>
           </div>
 
         </div>

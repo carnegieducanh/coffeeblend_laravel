@@ -14,12 +14,12 @@
   <link rel="dns-prefetch" href="//fonts.bunny.net">
   <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-
   <!-- mmy files -->
 
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ asset('assets/css/open-iconic-bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
@@ -40,11 +40,64 @@
   <link rel="stylesheet" href="{{ asset('assets/css/icomoon.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
+  <style>
+    body[data-lang="ja"] {
+      font-family: 'Noto Sans JP', 'Poppins', sans-serif;
+    }
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .lang-btn {
+      padding: 4px 8px !important;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .lang-active {
+      color: #c49b63 !important;
+      font-weight: 700;
+    }
+    .lang-sep {
+      color: rgba(255,255,255,0.3);
+      line-height: 1;
+    }
+    #ftco-loader.fullscreen {
+      background-image: url('{{ asset('assets/images/bg_1.jpg') }}');
+      background-size: cover;
+      background-position: center;
+      background-color: transparent;
+    }
+    #ftco-loader.fullscreen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    #ftco-loader .circular {
+      z-index: 1;
+    }
+    #ftco-loader .loader-text {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + 44px);
+      transform: translateX(-50%);
+      margin: 0;
+      color: #c49b63;
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 1px;
+      z-index: 1;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+  </style>
+
   <!-- Scripts -->
   @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body>
+<body data-lang="{{ app()->getLocale() }}">
   <div id="app">
     <!-- HEADER -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -52,20 +105,20 @@
         <a class="navbar-brand" href="{{ url('/') }}">Coffee<small>Blend</small></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
           aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span> Menu
+          <span class="oi oi-menu"></span> {{ __('messages.nav_menu') }}
         </button>
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item {{ request()->routeIs('home', 'index') ? 'active' : '' }}"><a href="{{ route('home') }}"
-                class="nav-link">Home</a></li>
+                class="nav-link">{{ __('messages.nav_home') }}</a></li>
             <li class="nav-item {{ request()->routeIs('products.menu') ? 'active' : '' }}"><a
-                href="{{ route('products.menu') }}" class="nav-link">Menu</a></li>
+                href="{{ route('products.menu') }}" class="nav-link">{{ __('messages.nav_menu') }}</a></li>
             <li class="nav-item {{ request()->routeIs('services') ? 'active' : '' }}"><a href="{{ route('services') }}"
-                class="nav-link">Services</a></li>
+                class="nav-link">{{ __('messages.nav_services') }}</a></li>
             <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}"><a href="{{ route('about') }}"
-                class="nav-link">About</a></li>
+                class="nav-link">{{ __('messages.nav_about') }}</a></li>
             <li class="nav-item {{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}"
-                class="nav-link">Contact</a></li>
+                class="nav-link">{{ __('messages.nav_contact') }}</a></li>
 
             @auth
             @php $cartCount = \App\Models\Product\Cart::where('user_id', Auth::id())->count(); @endphp
@@ -83,12 +136,12 @@
             @endauth
             @guest
             @if (Route::has('login'))
-            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">login</a></li>
+            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">{{ __('messages.nav_login') }}</a></li>
             @endif
 
             @if (Route::has('register'))
 
-            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">register</a></li>
+            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">{{ __('messages.nav_register') }}</a></li>
             @endif
             @else
             <li class="nav-item dropdown">
@@ -100,14 +153,14 @@
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                 <a class="dropdown-item" href="{{ route('users.orders') }}">
-                  My Orders
+                  {{ __('messages.nav_my_orders') }}
                 </a>
                 <a class="dropdown-item" href="{{ route('users.bookings') }}">
-                  My Bookings
+                  {{ __('messages.nav_my_bookings') }}
                 </a>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
+                  {{ __('messages.nav_logout') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                   @csrf
@@ -115,13 +168,20 @@
               </div>
             </li>
             @endguest
+
+            <!-- Language Switcher -->
+            <li class="nav-item lang-switcher">
+              <a href="{{ route('lang.switch', 'en') }}" class="nav-link lang-btn {{ app()->getLocale() == 'en' ? 'lang-active' : '' }}">🇺🇸 EN</a>
+              <span class="lang-sep">|</span>
+              <a href="{{ route('lang.switch', 'ja') }}" class="nav-link lang-btn {{ app()->getLocale() == 'ja' ? 'lang-active' : '' }}">🇯🇵 JP</a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
     <!-- MAIN -->
-    <main class="py-4">
+    <main>
       @yield('content')
     </main>
   </div>
@@ -133,9 +193,8 @@
       <div class="row mb-5">
         <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">About Us</h2>
-            <p>CoffeeBlend is a specialty coffee café in the heart of Shibuya, Tokyo. We craft every cup with passion,
-              precision, and the finest beans from around the world.</p>
+            <h2 class="ftco-heading-2">{{ __('messages.footer_about_us') }}</h2>
+            <p>{{ __('messages.footer_about_desc') }}</p>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
               <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
               <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -145,31 +204,31 @@
         </div>
         <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Quick Links</h2>
+            <h2 class="ftco-heading-2">{{ __('messages.footer_quick_links') }}</h2>
             <ul class="list-unstyled">
-              <li><a href="{{ route('home') }}" class="py-2 d-block">Home</a></li>
-              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">Our Menu</a></li>
-              <li><a href="{{ route('services') }}" class="py-2 d-block">Services</a></li>
-              <li><a href="{{ route('about') }}" class="py-2 d-block">About Us</a></li>
-              <li><a href="{{ route('contact') }}" class="py-2 d-block">Contact</a></li>
+              <li><a href="{{ route('home') }}" class="py-2 d-block">{{ __('messages.nav_home') }}</a></li>
+              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">{{ __('messages.footer_our_menu') }}</a></li>
+              <li><a href="{{ route('services') }}" class="py-2 d-block">{{ __('messages.nav_services') }}</a></li>
+              <li><a href="{{ route('about') }}" class="py-2 d-block">{{ __('messages.footer_about_link') }}</a></li>
+              <li><a href="{{ route('contact') }}" class="py-2 d-block">{{ __('messages.nav_contact') }}</a></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Services</h2>
+            <h2 class="ftco-heading-2">{{ __('messages.footer_services') }}</h2>
             <ul class="list-unstyled">
-              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">Dine In</a></li>
-              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">Online Order</a></li>
-              <li><a href="{{ route('home') }}#" class="py-2 d-block">Table Booking</a></li>
-              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">Coffee Delivery</a></li>
-              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">Seasonal Specials</a></li>
+              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">{{ __('messages.footer_dine_in') }}</a></li>
+              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">{{ __('messages.footer_online_order') }}</a></li>
+              <li><a href="{{ route('home') }}#" class="py-2 d-block">{{ __('messages.footer_table_booking') }}</a></li>
+              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">{{ __('messages.footer_coffee_delivery') }}</a></li>
+              <li><a href="{{ route('products.menu') }}" class="py-2 d-block">{{ __('messages.footer_seasonal_specials') }}</a></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Have a Question?</h2>
+            <h2 class="ftco-heading-2">{{ __('messages.footer_have_question') }}</h2>
             <ul class="list-unstyled footer-contact">
               <li class="d-flex mb-3">
                 <span class="icon icon-map-marker mr-3" style="padding-top:3px; min-width:18px;"></span>
@@ -198,7 +257,7 @@
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;<script>
             document.write(new Date().getFullYear());
-            </script> All rights reserved</a>
+            </script> {{ __('messages.footer_copyright') }}</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           </p>
         </div>
@@ -208,11 +267,14 @@
 
 
   <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+  <div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
       <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
       <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
         stroke="#F96D00" />
-    </svg></div>
+    </svg>
+    <p class="loader-text">{{ __('messages.loading_please_wait') }}</p>
+  </div>
 
   <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
   <script src="{{ asset('assets/js/jquery-migrate-3.0.1.min.js') }}"></script>

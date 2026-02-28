@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LanguageController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
 Auth::routes();
 
