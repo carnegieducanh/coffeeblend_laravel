@@ -63,14 +63,14 @@
 
                     <ul class="navbar-nav ml-md-auto d-md-flex">
                         @auth('admin')
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('admins.dashboard') }}">
                                 <i class="fa-solid fa-gauge-high"></i> Dashboard
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}" title="Back to homepage">
-                                <i class="fa-solid fa-arrow-left"></i> Back to Site
+                                <i class="fa-solid fa-house"></i> Back to Site
                             </a>
                         </li>
 
