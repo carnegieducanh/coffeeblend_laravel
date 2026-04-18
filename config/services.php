@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'firebase' => [
+        'api_key'           => env('FIREBASE_API_KEY'),
+        'super_admin_email' => env('FIREBASE_SUPER_ADMIN_EMAIL'),
+    ],
+
 ];

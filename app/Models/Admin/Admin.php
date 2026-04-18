@@ -18,7 +18,14 @@ class Admin extends Authenticatable
     'name',
     'email',
     'password',
+    'role',
+    'firebase_uid',
   ];
+
+  public function isSuperAdmin(): bool
+  {
+      return $this->role === 'super_admin';
+  }
 
   /**
    * The attributes that should be hidden for serialization.

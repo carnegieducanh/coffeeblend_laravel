@@ -21,7 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // Custom aliases
         $middleware->alias([
             'check.for.price' => \App\Http\Middleware\CheckForPrice::class,
-            'check.for.aut' => \App\Http\Middleware\CheckForAuth::class,
+            'check.for.aut'   => \App\Http\Middleware\CheckForAuth::class,
+            'super.admin'     => \App\Http\Middleware\CheckSuperAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

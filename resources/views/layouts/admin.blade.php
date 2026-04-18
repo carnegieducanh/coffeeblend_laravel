@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div id="wrapper">
+    <div id="wrapper" @guest('admin') style="margin-left: 0 !important;" @endguest>
         <nav class="navbar header-top fixed-top navbar-expand-lg navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ Auth::guard('admin')->check() ? route('admins.dashboard') : '#' }}">
@@ -56,6 +56,12 @@
                             <a class="nav-link {{ request()->routeIs('all.bookings', 'edit.booking') ? 'active' : '' }}"
                                 href="{{ route('all.bookings') }}">
                                 <i class="fa-solid fa-calendar-days"></i> Bookings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('all.users', 'edit.user') ? 'active' : '' }}"
+                                href="{{ route('all.users') }}">
+                                <i class="fa-solid fa-user-group"></i> Customers
                             </a>
                         </li>
                     </ul>

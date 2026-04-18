@@ -213,6 +213,15 @@ return [
     'btn_register'           => '登録する',
     'login_as_admin'         => 'または管理者としてログイン',
 
+    // ── Admin Login ─────────────────────────────────────────────────────────
+    'admin_login_title'        => '管理者ログイン',
+    'admin_login_email'        => 'メールアドレス',
+    'admin_login_password'     => 'パスワード',
+    'admin_login_btn'          => 'ログイン',
+    'admin_login_google_label' => 'スーパー管理者はGoogleでログイン',
+    'admin_login_google_btn'   => 'Googleでログイン',
+    'admin_login_processing'   => '処理中...',
+
     // ── Flash Messages ───────────────────────────────────────────────────────
     'flash_login_success'       => 'ログインしました。おかえりなさい、:name！',
     'flash_login_with_cart'     => 'ログインしました。商品をカートに追加しました。',

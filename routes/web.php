@@ -6,8 +6,10 @@ use App\Http\Controllers\LanguageController;
 
 Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
+//Auth routes (login/register tự động)
 Auth::routes();
 
+//Trang công khai
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/services', [App\Http\Controllers\HomeController::class, 'services'])->name('services');
@@ -44,9 +46,9 @@ Route::group(['prefix' => 'products'], function () {
 
 
 
-
+//Nhóm Users (tất cả cần auth)
 Route::group(['prefix' => 'users'], function () {
-    //users pages
+
     Route::get('/orders', [App\Http\Controllers\Users\UsersController::class, 'displayOrders'])->name('users.orders')->middleware('auth:web');
     Route::get('/bookings', [App\Http\Controllers\Users\UsersController::class, 'displayBookings'])->name('users.bookings')->middleware('auth:web');
     //my account
@@ -58,9 +60,10 @@ Route::group(['prefix' => 'users'], function () {
 });
 
 
-
+//Nhóm Admin (guard riêng biệt)
 Route::get('admin/login', [App\Http\Controllers\Admins\AdminsController::class, 'viewLogin'])->name('view.login')->middleware('check.for.aut');
 Route::post('admin/login', [App\Http\Controllers\Admins\AdminsController::class, 'checkLogin'])->name('check.login');
+Route::post('admin/firebase-login', [App\Http\Controllers\Admins\AdminsController::class, 'firebaseLogin'])->name('admin.firebase.login');
 Route::post('admin/logout', [App\Http\Controllers\Admins\AdminsController::class, 'logout'])->name('admin.logout');
 
 
@@ -68,19 +71,25 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     Route::get('index', [App\Http\Controllers\Admins\AdminsController::class, 'index'])->name('admins.dashboard');
 
-    //admins section
-    Route::get('all-admins', [App\Http\Controllers\Admins\AdminsController::class, 'displayAllAdmins'])->name('all.admins');
-    Route::get('create-admins', [App\Http\Controllers\Admins\AdminsController::class, 'createAdmins'])->name('create.admins');
-    Route::post('create-admins', [App\Http\Controllers\Admins\AdminsController::class, 'storeAdmins'])->name('store.admins');
+    // Chỉ Super Admin mới được quản lý tài khoản admin
+    Route::group(['middleware' => 'super.admin'], function () {
+        Route::get('all-admins', [App\Http\Controllers\Admins\AdminsController::class, 'displayAllAdmins'])->name('all.admins');
+        Route::get('create-admins', [App\Http\Controllers\Admins\AdminsController::class, 'createAdmins'])->name('create.admins');
+        Route::post('create-admins', [App\Http\Controllers\Admins\AdminsController::class, 'storeAdmins'])->name('store.admins');
+        Route::get('delete-admin/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteAdmins'])->name('delete.admin');
+    });
 
+    //users (customers)
+    Route::get('all-users', [App\Http\Controllers\Admins\AdminsController::class, 'displayUsers'])->name('all.users');
+    Route::get('edit-user/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'editUser'])->name('edit.user');
+    Route::post('edit-user/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'updateUser'])->name('update.user');
+    Route::get('delete-user/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteUser'])->name('delete.user');
 
     //orders
     Route::get('all-orders', [App\Http\Controllers\Admins\AdminsController::class, 'displayAllOrders'])->name('all.orders');
     Route::get('edit-order/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'editOrders'])->name('edit.order');
     Route::post('edit-order/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'UpdateOrders'])->name('update.order');
-
     Route::get('delete-order/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteOrders'])->name('delete.order');
-
 
     //products
     Route::get('all-products', [App\Http\Controllers\Admins\AdminsController::class, 'displayProducts'])->name('all.products');

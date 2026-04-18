@@ -213,6 +213,15 @@ return [
     'btn_register'           => 'Register',
     'login_as_admin'         => 'or login as admin',
 
+    // ── Admin Login ─────────────────────────────────────────────────────────
+    'admin_login_title'        => 'Admin Login',
+    'admin_login_email'        => 'Email',
+    'admin_login_password'     => 'Password',
+    'admin_login_btn'          => 'Login',
+    'admin_login_google_label' => 'Super Admin login with Google',
+    'admin_login_google_btn'   => 'Login with Google',
+    'admin_login_processing'   => 'Processing...',
+
     // ── Flash Messages ───────────────────────────────────────────────────────
     'flash_login_success'       => 'Logged in successfully. Welcome back, :name!',
     'flash_login_with_cart'     => 'Logged in successfully. Product added to cart.',
